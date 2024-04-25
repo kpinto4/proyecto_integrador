@@ -19,7 +19,7 @@
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="50.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../logoinnovatech.png" />
+            <Image url="@../../imagenes/logoinnovatech.PNG" />
          </image>
       </ImageView>
    </children>

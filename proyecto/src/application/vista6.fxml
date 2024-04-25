@@ -36,17 +36,17 @@
       </LineChart>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="473.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Pictures/unnamed.png" />
+            <Image url="@../../imagenes/unnamed.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="204.0" fitWidth="334.0" layoutX="37.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Pictures/ui_gen_BarChart.png" />
+            <Image url="@../../imagenes/ui_gen_BarChart.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="204.0" fitWidth="295.0" layoutX="389.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../Pictures/istockphoto-1316780057-612x612.jpg" />
+            <Image url="@../../imagenes/istockphoto-1316780057-612x612.jpg" />
          </image>
       </ImageView>
       <MenuButton layoutX="39.0" layoutY="77.0" mnemonicParsing="false" text="Tipo De Reportes">
