@@ -34,7 +34,7 @@ public class DatosProducto {
     public void guardarProducto(Producto producto) {
         try {
             // Establecer la conexión con la base de datos
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "programming","programming");
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "INNOVATECH","INNOVATECH");
             // Crear una declaración SQL
             Statement st = conn.createStatement();
             // Consulta para insertar el nuevo producto en la tabla Productos
@@ -57,7 +57,7 @@ public class DatosProducto {
     public void eliminarProducto(Producto producto) {
         try {
             // Establecer la conexión con la base de datos
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "programming","programming");
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "INNOVATECH","INNOVATECH");
             // Crear una declaración SQL
             Statement st = conn.createStatement();
             // Consulta para eliminar el producto con la referencia dada
