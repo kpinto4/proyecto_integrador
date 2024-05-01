@@ -2,77 +2,84 @@ package application;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DatosProducto {
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String USER = "INNOVATECH";
+    private static final String PASSWORD = "INNOVATECH";
 
     public LinkedList<Producto> getDatos() {
-    	Producto a = null;
-		LinkedList<Producto> data = new LinkedList<>();
-		try {
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "INNOVATECH","INNOVATECH");
-			Statement st= conn.createStatement();
-			String query = "select * from FacturasVenta";		
-			ResultSet result = st.executeQuery(query);
-			while(result.next()) {
-				a = new Producto(result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6));
-				data.add(a);
-    	
-			}
+        LinkedList<Producto> data = new LinkedList<>();
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement st = conn.prepareStatement("SELECT * FROM PRODUCTO");
+             ResultSet result = st.executeQuery()) {
+
+            while (result.next()) {
+                Producto producto = new Producto(
+                        result.getString("codproducto"),
+                        result.getString("descripcion"),
+                        result.getString("categoria"),
+                        result.getString("valor"),
+                        result.getString("stock")
+                );
+                data.add(producto);
+            }
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL imprimiendo el rastreo de la pila
             e.printStackTrace();
         }
-        return data; // Devolver la lista de productos
+        return data;
     }
 
-    // Método para guardar un nuevo producto en la base de datos
     public void guardarProducto(Producto producto) {
-        try {
-            // Establecer la conexión con la base de datos
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "INNOVATECH","INNOVATECH");
-            // Crear una declaración SQL
-            Statement st = conn.createStatement();
-            // Consulta para insertar el nuevo producto en la tabla Productos
-            String query = "INSERT INTO Productos (referencia, descripcion, categoria, cantidad, valor, stock) VALUES ('"
-                    + producto.getReferencia() + "', '" + producto.getDescripcion() + "', '" + producto.getCategoria()
-                    + "', " + producto.getCantidad() + ", " + producto.getValor() + ", " + producto.getStock() + ")";
-            // Ejecutar la consulta de inserción
-            st.executeUpdate(query);
+        String sql = "INSERT INTO PRODUCTO (codproducto, descripcion, categoria, stock, valor) VALUES (?, ?, ?, ?, ?)";
 
-            // Cerrar la declaración y la conexión
-            st.close();
-            conn.close();
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, producto.getCodProducto());
+            pstmt.setString(2, producto.getDescripcion());
+            pstmt.setString(3, producto.getCategoria());
+            pstmt.setString(4, producto.getValor());
+            pstmt.setString(5, producto.getStock());
+
+            pstmt.executeUpdate();
+            System.out.println("Producto guardado correctamente en la base de datos.");
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL imprimiendo el rastreo de la pila
+            System.out.println("Error al guardar el producto en la base de datos: " + e.getMessage());
+        }
+    
+    }
+
+    public void eliminarProducto(String codProducto) {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement st = conn.prepareStatement("DELETE FROM PRODUCTO WHERE codproducto = ?")) {
+
+            st.setString(1, codProducto);
+            st.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Método para eliminar un producto de la base de datos
-    public void eliminarProducto(Producto producto) {
-        try {
-            // Establecer la conexión con la base de datos
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.254.215:1521:orcl", "INNOVATECH","INNOVATECH");
-            // Crear una declaración SQL
-            Statement st = conn.createStatement();
-            // Consulta para eliminar el producto con la referencia dada
-            String query = "DELETE FROM Productos WHERE referencia = '" + producto.getReferencia() + "'";
-            // Ejecutar la consulta de eliminación
-            st.executeUpdate(query);
+    public void actualizarProducto(Producto producto) {
+        String sql = "UPDATE PRODUCTO SET descripcion = ?, categoria = ?, stock = ?, valor = ? WHERE codproducto = ?";
 
-            // Cerrar la declaración y la conexión
-            st.close();
-            conn.close();
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, producto.getDescripcion());
+            pstmt.setString(2, producto.getCategoria());
+            pstmt.setString(3, producto.getStock());
+            pstmt.setString(4, producto.getValor());
+            pstmt.setString(5, producto.getCodProducto());
+
+            pstmt.executeUpdate();
+            System.out.println("Producto actualizado correctamente en la base de datos.");
         } catch (SQLException e) {
-            // Manejar cualquier excepción de SQL imprimiendo el rastreo de la pila
-            e.printStackTrace();
+            System.out.println("Error al actualizar el producto en la base de datos: " + e.getMessage());
         }
     }
-
-
 }
