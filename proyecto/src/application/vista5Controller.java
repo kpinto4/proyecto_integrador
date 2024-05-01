@@ -156,7 +156,7 @@ public class vista5Controller implements Initializable{
 	            seleccion.setDescripcion(TextDescripcion.getText());
 	            seleccion.setCategoria(TextCategoria.getText());
 	            seleccion.setStock(TextStock.getText());
-	            seleccion.setValor(TextValo.getText());
+	            seleccion.setValor(TextValor.getText());
 
 	            data.actualizarProducto(seleccion);
 	            limpiarCamposTexto();
