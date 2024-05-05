@@ -67,5 +67,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <TextField layoutX="166.0" layoutY="176.0" prefHeight="25.0" prefWidth="119.0" promptText="cantidad" />
    </children>
 </AnchorPane>
