@@ -7,19 +7,19 @@ public class Usuario {
     private String Direccion;
     private String Telefono;
     private String Usuario;
-    private String Contraseña;
+    private String Contrasena;
     private String Cargo;
 	
 	
 	
-	public Usuario(String CedUsuario, String Nombre, String Apellido, String Direccion, String Telefono, String Usuario, String Contraseña, String Cargo) {
+	public Usuario(String CedUsuario, String Nombre, String Apellido, String Direccion, String Telefono, String Usuario, String Contrasena, String Cargo) {
         this.CedUsuario = CedUsuario;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Direccion = Direccion;
         this.Telefono = Telefono;
         this.Usuario = Usuario;
-        this.Contraseña = Contraseña;
+        this.Contrasena = Contrasena;
         this.Cargo = Cargo;
        
     }
@@ -98,14 +98,14 @@ public class Usuario {
 
 
 
-	public String getContraseña() {
-		return Contraseña;
+	public String getContrasena() {
+		return Contrasena;
 	}
 
 
 
-	public void setContraseña(String contraseña) {
-		Contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		Contrasena = contrasena;
 	}
 
 

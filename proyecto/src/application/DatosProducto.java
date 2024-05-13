@@ -21,11 +21,11 @@ public class DatosProducto {
 
             while (result.next()) {
                 Producto producto = new Producto(
-                        result.getString("codproducto"),
+                        result.getString("referencia"),
                         result.getString("descripcion"),
                         result.getString("categoria"),
-                        result.getString("valor"),
-                        result.getString("stock")
+                        result.getString("stock"),
+                        result.getString("valor")
                 );
                 data.add(producto);
             }
@@ -36,15 +36,15 @@ public class DatosProducto {
     }
 
     public void guardarProducto(Producto producto) {
-        String sql = "INSERT INTO PRODUCTO (codproducto, descripcion, categoria, stock, valor) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUCTO (referencia, descripcion, categoria, stock, valor) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, producto.getCodProducto());
+            pstmt.setString(1, producto.getReferencia());
             pstmt.setString(2, producto.getDescripcion());
             pstmt.setString(3, producto.getCategoria());
-            pstmt.setString(4, producto.getValor());
-            pstmt.setString(5, producto.getStock());
+            pstmt.setString(4, producto.getStock());
+            pstmt.setString(5, producto.getValor());
 
             pstmt.executeUpdate();
             System.out.println("Producto guardado correctamente en la base de datos.");
@@ -54,11 +54,11 @@ public class DatosProducto {
     
     }
 
-    public void eliminarProducto(String codProducto) {
+    public void eliminarProducto(String referencia) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement st = conn.prepareStatement("DELETE FROM PRODUCTO WHERE codproducto = ?")) {
+             PreparedStatement st = conn.prepareStatement("DELETE FROM PRODUCTO WHERE referencia = ?")) {
 
-            st.setString(1, codProducto);
+            st.setString(1, referencia);
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,15 +66,16 @@ public class DatosProducto {
     }
 
     public void actualizarProducto(Producto producto) {
-        String sql = "UPDATE PRODUCTO SET descripcion = ?, categoria = ?, stock = ?, valor = ? WHERE codproducto = ?";
+        String sql = "UPDATE PRODUCTO SET descripcion = ?, categoria = ?, stock = ?, valor = ? WHERE referencia = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, producto.getDescripcion());
+        	pstmt.setString(1, producto.getDescripcion());
             pstmt.setString(2, producto.getCategoria());
             pstmt.setString(3, producto.getStock());
             pstmt.setString(4, producto.getValor());
-            pstmt.setString(5, producto.getCodProducto());
+            pstmt.setString(5, producto.getReferencia());
+            
 
             pstmt.executeUpdate();
             System.out.println("Producto actualizado correctamente en la base de datos.");

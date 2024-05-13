@@ -48,7 +48,7 @@ public class DatosUsuario {
 	            pstmt.setString(4, usuario.getDireccion());
 	            pstmt.setString(5, usuario.getTelefono());
 	            pstmt.setString(6, usuario.getUsuario());
-	            pstmt.setString(7, usuario.getContraseña());
+	            pstmt.setString(7, usuario.getContrasena());
 	            pstmt.setString(8, usuario.getCargo());
 	            
 
@@ -76,14 +76,14 @@ public class DatosUsuario {
 
 	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
 	             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-	        	pstmt.setString(1, usuario.getCedUsuario());
-	            pstmt.setString(2, usuario.getNombre());
-	            pstmt.setString(3, usuario.getApellido());
-	            pstmt.setString(4, usuario.getDireccion());
-	            pstmt.setString(5, usuario.getTelefono());
-	            pstmt.setString(6, usuario.getUsuario());
-	            pstmt.setString(7, usuario.getContraseña());
-	            pstmt.setString(8, usuario.getCargo());
+	            pstmt.setString(1, usuario.getNombre());
+	            pstmt.setString(2, usuario.getApellido());
+	            pstmt.setString(3, usuario.getDireccion());
+	            pstmt.setString(4, usuario.getTelefono());
+	            pstmt.setString(5, usuario.getUsuario());
+	            pstmt.setString(6, usuario.getContrasena());
+	            pstmt.setString(7, usuario.getCargo());
+	            pstmt.setString(8, usuario.getCedUsuario());
 
 	            pstmt.executeUpdate();
 	            System.out.println("usuario actualizado correctamente en la base de datos.");

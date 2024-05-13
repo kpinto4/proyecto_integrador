@@ -2,28 +2,29 @@ package application;
 
 public class Producto {
     // Propiedades del producto
-    private String codProducto;
+    private String referencia;
     private String descripcion;
     private String categoria;
-    private String valor;
     private String stock;
+    private String valor;
+    
 
     // Constructor para inicializar un objeto Producto con sus propiedades
-    public Producto(String codProducto, String descripcion, String categoria, String valor, String stock) {
-        this.codProducto = codProducto;
+    public Producto(String referencia, String descripcion, String categoria,String stock, String valor) {
+        this.referencia = referencia;
         this.descripcion = descripcion;
         this.categoria = categoria;
-        this.valor = valor;
         this.stock = stock;
+        this.valor = valor;
     }
 
     // Métodos getter y setter para codProducto
-    public String getCodProducto() {
-        return codProducto;
+    public String getReferencia() {
+        return referencia;
     }
 
-    public void setCodProducto(String codProducto) {
-        this.codProducto = codProducto;
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
     // Métodos getter y setter para descripcion
@@ -44,15 +45,6 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    // Métodos getter y setter para valor
-    public String getValor() {
-        return valor;
-    }
-
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
-
     // Métodos getter y setter para stock
     public String getStock() {
         return stock;
@@ -60,6 +52,15 @@ public class Producto {
 
     public void setStock(String stock) {
         this.stock = stock;
+    }
+    
+    // Métodos getter y setter para valor
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
     }
 
        
