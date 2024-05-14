@@ -139,6 +139,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
+
 public class MenuController {
     @FXML
     private ImageView btnFacturacion;
@@ -152,17 +154,15 @@ public class MenuController {
     private ImageView btnInformes;
     @FXML
     private Button btnCerrar;
-
+    @FXML
     private String cargoUsuario; // Variable para almacenar el cargo del usuario
     
     
     
-    // Método para establecer el cargo del usuario
+   // Método para establecer el cargo del usuario
     public void setCargoUsuario(String cargoUsuario) {
         this.cargoUsuario = cargoUsuario;
     }
-    
-
 
     // Evento para el botón de facturación
     @FXML
@@ -210,7 +210,7 @@ public class MenuController {
         // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
             abrirVentana("Producto.fxml");
-        } else {
+        } else {         	
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
             
             Alert error = new Alert(Alert.AlertType.ERROR);

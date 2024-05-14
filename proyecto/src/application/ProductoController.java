@@ -57,6 +57,7 @@ public class ProductoController implements Initializable{
 	private TextField TextValor;
 	@FXML
 	private ImageView btnCerrar;
+		
 
 	
 	ObservableList<Producto> Datos = FXCollections.observableArrayList();
@@ -181,6 +182,9 @@ public class ProductoController implements Initializable{
 		TextStock.clear();
 		TextValor.clear();
        }
+	
+	
+	
 
 	// Event Listener on Button[#btnCerrar].onMouseClicked
 	@FXML
@@ -196,8 +200,26 @@ public class ProductoController implements Initializable{
 		//Stage stage = new Stage();
 		currenStage.setScene(new Scene(loader.load()));
 		currenStage.show();
-        return;
+        
+		return;
+		
+		
+		
+		
+		
+		/*Stage currentStage = (Stage) btnCerrar.getScene().getWindow();
+        //currentStage.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        //Stage stage = new Stage();
+        currentStage.setScene(new Scene(loader.load()));
+        currentStage.show();*/
+		
+		
+        
+
 	}
+
+
 	
 }
 
