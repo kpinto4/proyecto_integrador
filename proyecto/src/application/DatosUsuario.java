@@ -30,6 +30,7 @@ public class DatosUsuario {
 	                        result.getString("Cargo")
 	                );
 	                data.add(Usuario);
+	                
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
