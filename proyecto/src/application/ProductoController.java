@@ -204,7 +204,7 @@ public class ProductoController implements Initializable{
 		return;
 		
 		
-		
+			
 		
 		
 		/*Stage currentStage = (Stage) btnCerrar.getScene().getWindow();
