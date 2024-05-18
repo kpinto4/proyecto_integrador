@@ -163,6 +163,12 @@ public class MenuController {
     public void setCargoUsuario(String cargoUsuario) {
         this.cargoUsuario = cargoUsuario;
     }
+    
+ // Método para inicializar el controlador
+    @FXML
+    public void initialize() {
+        cargoUsuario = Sesion.getCargoUsuario(); // Obtener el cargo del usuario desde Sesion
+    }
 
     // Evento para el botón de facturación
     @FXML
@@ -171,7 +177,7 @@ public class MenuController {
 
         // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && (cargoUsuario.equals("administrador") || cargoUsuario.equals("vendedor"))) {
-            abrirVentana("vista2.fxml");
+            abrirVentana("Facturacion.fxml");
         } else {
             System.out.println("Acceso denegado.");
             
@@ -247,7 +253,7 @@ public class MenuController {
 
         // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
-            abrirVentana("vista6.fxml");
+            abrirVentana("Informe.fxml");
         } else {
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
             
