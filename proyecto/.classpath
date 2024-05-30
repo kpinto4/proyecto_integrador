@@ -12,6 +12,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/jdbc"/>
-	<classpathentry exported="true" kind="lib" path="D:/KEVIN/Downloads/ojdbc11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
