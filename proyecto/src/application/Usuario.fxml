@@ -25,7 +25,6 @@
          <columns>
             <TableColumn fx:id="CedUsuarioColumn" onEditCommit="#OnCedUsuarioColumn" prefWidth="86.0" style="-fx-background-color: #8BFAFF;" text="CEDUSUARIO" />
             <TableColumn fx:id="NombreColumn" onEditCommit="#OnNombreColumn" prefWidth="72.0" style="-fx-background-color: #8BFAFF;" text="NOMBRE" />
-            <TableColumn fx:id="ApellidoColumn" onEditCommit="#OnApellidoColumn" prefWidth="73.0" style="-fx-background-color: #8BFAFF;" text="APELLIDO" />
             <TableColumn fx:id="DireccionColumn" onEditCommit="#OnDireccionColumn" prefWidth="95.0" style="-fx-background-color: #8BFAFF;" text="DIRECCION" />
             <TableColumn fx:id="TelefonoColumn" editable="false" onEditCommit="#OnTelefonoColumn" prefWidth="81.0" sortable="false" style="-fx-background-color: #8BFAFF;" text="TELEFONO" />
             <TableColumn fx:id="UsuarioColumn" editable="false" onEditCommit="#OnUsuarioColumn" prefWidth="96.0" sortable="false" style="-fx-background-color: #8BFAFF;" text="USUARIO" />
@@ -109,32 +108,27 @@
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextApellido" maxWidth="200.0" promptText="APELLIDO" GridPane.columnIndex="2">
-               <GridPane.margin>
-                  <Insets bottom="3.0" left="5.0" top="5.0" />
-               </GridPane.margin>
-            </TextField>
-            <TextField fx:id="TextTelefono" layoutX="244.0" layoutY="17.0" maxWidth="200.0" promptText="TELEFONO" GridPane.rowIndex="1">
+            <TextField fx:id="TextDireccion" layoutX="287.0" layoutY="30.0" maxWidth="200.0" promptText="DIRECCION" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextUsuario" maxWidth="200.0" promptText="USUARIO" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="TextTelefono" layoutX="244.0" layoutY="17.0" maxWidth="200.0" promptText="TELEFONO" GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextDireccion" layoutX="287.0" layoutY="30.0" maxWidth="200.0" promptText="DIRECCION" GridPane.columnIndex="3">
+            <TextField fx:id="TextUsuario" maxWidth="200.0" promptText="USUARIO" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextContrasena" layoutX="287.0" layoutY="30.0" maxWidth="200.0" promptText="CONTRASEÑA" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="TextContrasena" layoutX="287.0" layoutY="30.0" maxWidth="200.0" promptText="CONTRASEÑA" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextCargo" layoutX="162.0" layoutY="82.0" maxWidth="200.0" promptText="CARGO" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <TextField fx:id="TextCargo" layoutX="162.0" layoutY="82.0" maxWidth="200.0" promptText="CARGO" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
@@ -148,3 +142,4 @@
       </ImageView>
    </children>
 </AnchorPane>
+
