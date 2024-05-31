@@ -4,6 +4,7 @@ module proyecto {
 	requires javafx.graphics;
 	requires java.sql;
 	requires java.base;
+	requires javafx.base;
 	
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
 }
