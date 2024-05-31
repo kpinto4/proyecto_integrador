@@ -25,7 +25,7 @@
          <columns>
             <TableColumn fx:id="ReferenciaColumn" onEditCommit="#OnReferencia" prefWidth="68.0" style="-fx-background-color: #8BFAFF;" text="REFERENCIA" />
             <TableColumn fx:id="DescripcionColumn" onEditCommit="#OnDescripcionColumn" prefWidth="84.0" style="-fx-background-color: #8BFAFF;" text="DESCRIPCION" />
-            <TableColumn fx:id="CategoriaColumn" onEditCommit="#OnCategoriaColumn" prefWidth="75.0" style="-fx-background-color: #8BFAFF;" text="CATEGORIA" />
+            <TableColumn fx:id="Categoria_idColumn" onEditCommit="#OnCategoria_idColumn" prefWidth="75.0" style="-fx-background-color: #8BFAFF;" text="CATEGORIA" />
             <TableColumn fx:id="StockColumn" onEditCommit="#OnStockColumn" prefWidth="75.0" style="-fx-background-color: #8BFAFF;" text="STOCK" />
             <TableColumn fx:id="ValorColumn" editable="false" onEditCommit="#OnValorColumn" prefWidth="75.0" sortable="false" style="-fx-background-color: #8BFAFF;" text="VALOR " />
          </columns>
@@ -105,7 +105,7 @@
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="TextCategoria" maxWidth="200.0" promptText="CATEGORIA" GridPane.columnIndex="2">
+            <TextField fx:id="TextCategoria_id" maxWidth="200.0" promptText="CATEGORIA ID" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="3.0" left="5.0" top="5.0" />
                </GridPane.margin>
