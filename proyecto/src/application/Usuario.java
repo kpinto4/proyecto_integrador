@@ -1,123 +1,81 @@
 package application;
 
 public class Usuario {
-	private String CedUsuario;
+    private String Cedula;
     private String Nombre;
-    private String Apellido;
     private String Direccion;
     private String Telefono;
     private String Usuario;
     private String Contrasena;
     private String Cargo;
-	
-	
-	
-	public Usuario(String CedUsuario, String Nombre, String Apellido, String Direccion, String Telefono, String Usuario, String Contrasena, String Cargo) {
-        this.CedUsuario = CedUsuario;
+
+    // Constructor adaptado para los datos combinados de empleado y usuario
+    public Usuario(String Cedula, String Nombre, String Direccion, String Telefono,String Usuario, String Contrasena, String Cargo) {
+        this.Cedula = Cedula;
         this.Nombre = Nombre;
-        this.Apellido = Apellido;
         this.Direccion = Direccion;
         this.Telefono = Telefono;
         this.Usuario = Usuario;
         this.Contrasena = Contrasena;
         this.Cargo = Cargo;
-       
     }
 
+    
 
+	// Getters y setters
+    public String getCedula() {
+        return Cedula;
+    }
 
-	public String getCedUsuario() {
-		return CedUsuario;
-	}
+    public void setCedula(String Cedula) {
+        this.Cedula = Cedula;
+    }
 
+    public String getNombre() {
+        return Nombre;
+    }
 
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
 
-	public void setCedUsuario(String cedUsuario) {
-		CedUsuario = cedUsuario;
-	}
+    public String getDireccion() {
+        return Direccion;
+    }
 
+    public void setDireccion(String Direccion) {
+        this.Direccion = Direccion;
+    }
 
+    public String getTelefono() {
+        return Telefono;
+    }
 
-	public String getNombre() {
-		return Nombre;
-	}
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
 
-
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
-	}
-
-
-
-	public String getApellido() {
-		return Apellido;
-	}
-
-
-
-	public void setApellido(String apellido) {
-		Apellido = apellido;
-	}
-
-
-
-	public String getDireccion() {
-		return Direccion;
-	}
-
-
-
-	public void setDireccion(String direccion) {
-		Direccion = direccion;
-	}
-
-
-
-	public String getTelefono() {
-		return Telefono;
-	}
-
-
-
-	public void setTelefono(String telefono) {
-		Telefono = telefono;
-	}
-
-
-
-	public String getUsuario() {
+    public String getUsuario() {
 		return Usuario;
 	}
-
-
 
 	public void setUsuario(String usuario) {
 		Usuario = usuario;
 	}
+	
+    public String getContrasena() {
+        return Contrasena;
+    }
 
+    public void setContrasena(String Contrasena) {
+        this.Contrasena = Contrasena;
+    }
 
+    public String getCargo() {
+        return Cargo;
+    }
 
-	public String getContrasena() {
-		return Contrasena;
-	}
-
-
-
-	public void setContrasena(String contrasena) {
-		Contrasena = contrasena;
-	}
-
-
-
-	public String getCargo() {
-		return Cargo;
-	}
-
-
-
-	public void setCargo(String cargo) {
-		Cargo = cargo;
-	}
-
+    public void setCargo(String Cargo) {
+        this.Cargo = Cargo;
+    }
 }

@@ -193,38 +193,44 @@ public class LoginController {
              PreparedStatement st = conn.prepareStatement("SELECT usuario, cargo FROM USUARIO WHERE usuario = ? AND contrasena = ?")) {
             st.setString(1, username);
             st.setString(2, pass);
-            ResultSet result = st.executeQuery();
+            try (ResultSet result = st.executeQuery()) {
+                if (result.next()) {
+                    String cargo = result.getString("cargo");
 
-            if (result.next()) {
-                String cargo = result.getString("cargo");
+                    // Establecer el nombre y el cargo del usuario en Sesion
+                    Sesion.setNombreUsuario(username);
+                    Sesion.setCargoUsuario(cargo);
 
-                // Establecer el nombre y el cargo del usuario en Sesion
-                Sesion.setNombreUsuario(username);
-                Sesion.setCargoUsuario(cargo);
+                    System.out.println("Inicio de sesión exitoso");
 
-                System.out.println("Inicio de sesión exitoso");
+                    // Abrir la nueva ventana (puede ser el menú principal)
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+                    Parent root = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.show();
 
-                // Abrir la nueva ventana (puede ser el menú principal)
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
-                Parent root = loader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.show();
+                    // Cerrar la ventana actual
+                    Stage currentStage = (Stage) userText.getScene().getWindow();
+                    currentStage.close();
+                } else {
+                    System.out.println("Credenciales incorrectas");
 
-                // Cerrar la ventana actual
-                Stage currentStage = (Stage) userText.getScene().getWindow();
-                currentStage.close();
-            } else {
-                System.out.println("Credenciales incorrectas");
-
-                Alert error = new Alert(Alert.AlertType.ERROR);
-                error.setHeaderText("Credenciales incorrectas");
-                error.setContentText("Por favor, verifique sus credenciales e intente de nuevo.");
-                error.setTitle("Error de inicio de sesión");
-                error.show();
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setHeaderText("Credenciales incorrectas");
+                    error.setContentText("Por favor, verifique sus credenciales e intente de nuevo.");
+                    error.setTitle("Error de inicio de sesión");
+                    error.show();
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error al conectar con la base de datos: " + e.getMessage());
+
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("Error de base de datos");
+            error.setContentText("No se pudo conectar con la base de datos. Por favor, intente más tarde.");
+            error.setTitle("Error de conexión");
+            error.show();
         }
     }
 }
