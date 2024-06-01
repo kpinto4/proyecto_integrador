@@ -168,17 +168,20 @@ public class FacturacionController implements Initializable {
     private void configurarEventosMenuItem() {
         Efectivobtn.setOnAction(event -> {
             metodoPagoSeleccionado = 1;
-            FormaDePagoMenu.setText("Efectivo");
+            String nombreMetodoPago = "Efectivo";
+            FormaDePagoMenu.setText(nombreMetodoPago);
         });
 
         TCreditobtn.setOnAction(event -> {
             metodoPagoSeleccionado = 2;
-            FormaDePagoMenu.setText("Tarjeta de Crédito");
+            String nombreMetodoPago = "Tarjeta de Crédito";
+            FormaDePagoMenu.setText(nombreMetodoPago);
         });
 
         TDebitoBtn.setOnAction(event -> {
             metodoPagoSeleccionado = 3;
-            FormaDePagoMenu.setText("Tarjeta de Débito");
+            String nombreMetodoPago = "Tarjeta de Débito";
+            FormaDePagoMenu.setText(nombreMetodoPago);
         });
     }
 
@@ -285,35 +288,40 @@ public class FacturacionController implements Initializable {
 
     @FXML
     public void buscarFactura(MouseEvent event) {
+        // Obtener el ID de la factura ingresado en numeroFcaturaText
+        int facturaIdBuscada = Integer.parseInt(numeroFcaturaText.getText().trim());
+        
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement()) {
-
-            // Consultar todas las facturas
-            String sql = "SELECT * FROM factura";
-            ResultSet resultSet = statement.executeQuery(sql);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM factura WHERE factura_id = ?")) {
+            
+            // Establecer el parámetro del ID de la factura para la consulta preparada
+            statement.setInt(1, facturaIdBuscada);
+            
+            // Ejecutar la consulta
+            ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                // Obtener los detalles de cada factura
+                // Obtener los detalles de la factura
                 int facturaId = resultSet.getInt("factura_id");
                 Date fecha = resultSet.getDate("fecha");
                 String cedulaCliente = resultSet.getString("cedula_cliente");
                 int metodoPagoId = resultSet.getInt("metodo_pago_id");
 
                 // Imprimir o procesar los datos de la factura
-                System.out.println("Factura ID: " + facturaId);
-                System.out.println("Fecha: " + fecha);
-                System.out.println("Cedula Cliente: " + cedulaCliente);
-                System.out.println("Metodo de Pago ID: " + metodoPagoId);
-
+                System.out.println("\n Factura ID: " + facturaId);
+                System.out.println("\n Fecha: " + fecha);
+                System.out.println("\n Cedula Cliente: " + cedulaCliente);
+                System.out.println("\n Metodo de Pago ID: " + metodoPagoId);
+                
                 // Obtener los detalles de la factura
                 List<DetalleFactura> detalles = obtenerDetallesFactura(facturaId);
                 for (DetalleFactura detalle : detalles) {
                     // Imprimir o procesar los detalles de la factura
-                    System.out.println("Detalle ID: " + detalle.getDetalleId());
-                    System.out.println("Referencia Producto: " + detalle.getReferenciaProducto());
-                    System.out.println("Descripcion: " + detalle.getDescripcion());
-                    System.out.println("Cantidad: " + detalle.getCantidad());
-                    System.out.println("Valor Total: " + detalle.getValorTotal());
+                    System.out.println("\n Referencia Producto: " + detalle.getReferenciaProducto());
+                    System.out.println("\n Descripcion: " + detalle.getDescripcion());
+                    System.out.println("\n Cantidad: " + detalle.getCantidad());
+                    System.out.println("\n Valor Total: " + detalle.getValorTotal());
+                    
                 }
             }
 
@@ -321,12 +329,14 @@ public class FacturacionController implements Initializable {
             e.printStackTrace();
         }
     }
-
     private List<DetalleFactura> obtenerDetallesFactura(int facturaId) {
         List<DetalleFactura> detalles = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM detalle_factura WHERE factura_id = ?")) {
+             PreparedStatement statement = connection.prepareStatement(
+                     "SELECT referencia_producto, descripcion, cantidad, valor_total " +
+                     "FROM detalle_factura " +
+                     "WHERE factura_id = ?")) {
             
             // Establecer el parámetro para la consulta preparada
             statement.setInt(1, facturaId);
@@ -336,14 +346,13 @@ public class FacturacionController implements Initializable {
             
             // Iterar sobre los resultados y agregar cada detalle a la lista
             while (resultSet.next()) {
-                int detalleId = resultSet.getInt("detalle_id");
                 int referenciaProducto = resultSet.getInt("referencia_producto");
                 String descripcion = resultSet.getString("descripcion");
                 int cantidad = resultSet.getInt("cantidad");
                 double valorTotal = resultSet.getDouble("valor_total");
                 
                 // Crear un objeto DetalleFactura y agregarlo a la lista
-                DetalleFactura detalle = new DetalleFactura(detalleId, facturaId, referenciaProducto, descripcion, cantidad, valorTotal);
+                DetalleFactura detalle = new DetalleFactura(facturaId, referenciaProducto, descripcion, cantidad, valorTotal);
                 detalles.add(detalle);
             }
             
@@ -427,40 +436,7 @@ public class FacturacionController implements Initializable {
             System.out.println("Error al generar la factura: " + e.getMessage());
         }
     }
-    
-    /*private void obtenerMetodosDePagoDesdeBD() {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement()) {
-            String sql = "SELECT METODO_ID, NOMBRE FROM metodo_pago";
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            // Limpiar cualquier contenido previo en el menú desplegable
-            FormaDePagoMenu.getItems().clear();
-
-            // Agregar métodos de pago al menú desplegable
-            while (resultSet.next()) {
-                int metodoPagoId = resultSet.getInt("METODO_ID");
-                String nombreMetodoPago = resultSet.getString("NOMBRE");
-
-                MenuItem menuItem = new MenuItem(nombreMetodoPago);
-                menuItem.setOnAction(event -> {
-                    metodoPagoSeleccionado = metodoPagoId; // Actualizar método de pago seleccionado
-                    FormaDePagoMenu.setText(nombreMetodoPago); // Actualizar texto del menú
-                });
-
-                FormaDePagoMenu.getItems().add(menuItem);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Manejo básico de excepciones, se puede mejorar según el caso
-        }
-    }
-*/
-   /* private int obtenerNuevoDetalleId() {
-        // Implementar la lógica para obtener un nuevo ID de detalle
-        return 0; // Este es solo un ejemplo
-    }*/
-
-    
+        
     @FXML
     public void eliminarElementoFactura(MouseEvent event) {
         // Obtener el índice del elemento seleccionado en la tabla
@@ -501,15 +477,7 @@ public class FacturacionController implements Initializable {
         return ultimoNumeroFactura;
     }
 
-    /*private void guardarNumeroFacturaEnBD(int numeroFactura) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement()) {
-            String sql = "INSERT INTO factura (factura_id) VALUES (" + numeroFactura + ")";
-            statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
+
     
     public double obtenerValorTotalFactura(String facturaId) {
         double valorTotal = 0.0;
@@ -530,6 +498,9 @@ public class FacturacionController implements Initializable {
 
         return valorTotal;
     }
+    
+    
+    
 }
     
 

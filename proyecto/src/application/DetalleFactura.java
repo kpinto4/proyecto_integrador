@@ -1,15 +1,14 @@
 package application;
 
 public class DetalleFactura {
-    private int detalleId;
     private int facturaId;
     private int referenciaProducto;
     private String descripcion;
     private int cantidad;
     private double valorTotal;
 
-    public DetalleFactura(int detalleId, int facturaId, int referenciaProducto, String descripcion, int cantidad, double valorTotal) {
-        this.detalleId = detalleId;
+    public DetalleFactura(int facturaId, int referenciaProducto, String descripcion, int cantidad, double valorTotal) {
+
         this.facturaId = facturaId;
         this.referenciaProducto = referenciaProducto;
         this.descripcion = descripcion;
@@ -17,9 +16,7 @@ public class DetalleFactura {
         this.valorTotal = valorTotal;
     }
 
-    public int getDetalleId() {
-        return detalleId;
-    }
+
 
     public int getFacturaId() {
         return facturaId;

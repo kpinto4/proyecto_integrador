@@ -155,7 +155,7 @@ public class DatosFactura {
                 int cantidad = resultSet.getInt("cantidad");
                 double valorTotal = resultSet.getDouble("valor_total");
                 
-                DetalleFactura detalle = new DetalleFactura(detalleId, numeroFactura, referenciaProducto, descripcion, cantidad, valorTotal);
+                DetalleFactura detalle = new DetalleFactura(numeroFactura, referenciaProducto, descripcion, cantidad, valorTotal);
                 detalles.add(detalle);
             }
         } catch (SQLException e) {
@@ -188,7 +188,6 @@ public class DatosFactura {
 
             // Insertar los detalles de la factura
             for (DetalleFactura detalle : factura.getDetalles()) {
-                statementDetalle.setInt(1, detalle.getDetalleId());
                 statementDetalle.setInt(2, facturaId); // Usar el ID de la factura generada
                 statementDetalle.setInt(3, detalle.getReferenciaProducto());
                 statementDetalle.setString(4, detalle.getDescripcion());
