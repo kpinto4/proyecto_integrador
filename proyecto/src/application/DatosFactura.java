@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * - Importaciones necesarias para el desarrollo.
+ */
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -10,15 +13,20 @@ import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
-
+/**
+ * - La clase DatosFactura sirve para manejar los procedimientos correspondientes en la base de datos.
+ * @author Kevin Santiago
+ *
+ */
 public class DatosFactura {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USUARIO = "BASE";
     private static final String CONTRASEÑA = "BASE";
     private static Connection conexion;
     
-
+    /**
+     * - Constructor privado para inicializar la conexión a la base de datos.
+     */
     private DatosFactura() {
         try {
             conexion = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
@@ -27,14 +35,25 @@ public class DatosFactura {
         }
     }
 
+    /**
+     * - Clase interna para manejar la instancia única de DatosFactura.
+     */
     private static class SingletonHelper {
         private static final DatosFactura INSTANCE = new DatosFactura();
     }
 
+    /**
+     * - Obtiene la instancia única de DatosFactura.
+     * @return Returna el dato obtenido.
+     */
     public static DatosFactura getInstance() {
         return SingletonHelper.INSTANCE;
     }
 
+    /**
+     * - Obtiene todos los productos desde la base de datos.
+     * @return Una lista de productos.
+     */
     public List<Producto> obtenerProductos() {
         List<Producto> productos = new ArrayList<>();
         String consulta = "SELECT * FROM producto";
@@ -58,6 +77,10 @@ public class DatosFactura {
         return productos;
     }
 
+    /**
+     * - Obtiene todos los clientes desde la base de datos.
+     * @return Una lista de clientes.
+     */
     public List<Cliente> obtenerClientes() {
         List<Cliente> clientes = new ArrayList<>();
         String consulta = "SELECT * FROM cliente";
@@ -80,6 +103,11 @@ public class DatosFactura {
         return clientes;
     }
     
+    /**
+     * - Busca un cliente por su cédula en la base de datos.
+     * @param cedula es la cedula del cliente que buscamos.
+     * @return el cliente encontrado, o null si no se encuentra.
+     */
     public Cliente buscarClientePorCedula(String cedula) {
         Cliente cliente = null;
         String consulta = "SELECT * FROM cliente WHERE cedula = ?";
@@ -105,10 +133,19 @@ public class DatosFactura {
         return cliente;
     }
 
+    /**
+     * - Devuelve la conexión a la base de datos.
+     * @return la conexión a la base de datos.
+     */
     public Connection getConnection() {
         return conexion;
     }
 
+    /**
+     * - Busca una factura por su ID en la base de datos.
+     * @param facturaId el ID de la factura a buscar.
+     * @return la factura encontrada, o null si no se encuentra.
+     */
     public Factura buscarFacturaPorId(String facturaId) {
         Factura factura = null;
 
@@ -140,6 +177,11 @@ public class DatosFactura {
         return factura;
     }
     
+    /**
+     * - Obtiene los detalles de una factura dado su número.
+     * @param numeroFactura el número de la factura.
+     * @return una lista de los detalles factura.
+     */
     public List<DetalleFactura> obtenerDetallesFactura(int numeroFactura) {
         List<DetalleFactura> detalles = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(URL, USUARIO, CONTRASEÑA);
@@ -164,6 +206,10 @@ public class DatosFactura {
         return detalles;
     }
     
+    /**
+     * - Genera una nueva factura y sus detalles en la base de datos.
+     * @param factura la factura a generar
+     */
     public void generarFactura(Factura factura) {
         String sqlFactura = "INSERT INTO factura (factura_id, fecha, cedula_cliente, metodo_pago_id) VALUES (?, ?, ?, ?)";
         String sqlDetalle = "INSERT INTO detalle_factura (detalle_id, factura_id, referencia_producto, descripcion, cantidad, total) VALUES (?, ?, ?, ?, ?, ?)";
@@ -201,6 +247,10 @@ public class DatosFactura {
         }
     }
 
+    /**
+     * - Obtiene todos los metodos de pago desde la base de datos.
+     * @return Una lista de los metodos de pago.
+     */
     public List<MetodoPago> obtenerMetodosPago() {
         List<MetodoPago> metodosPago = new ArrayList<>();
         String query = "SELECT * FROM metodo_pago";

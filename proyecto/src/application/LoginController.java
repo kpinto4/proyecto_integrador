@@ -26,8 +26,8 @@ public class LoginController {
     private PasswordField passText;
 
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USER = "INNOVATECH";
-    private static final String PASSWORD = "INNOVATECH";
+    private static final String USER = "BASE";
+    private static final String PASSWORD = "BASE";
 
     @FXML
     public void btnLogin(MouseEvent event) throws IOException {

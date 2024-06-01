@@ -53,7 +53,10 @@ public class DatosUsuario {
 	        return data;
 	    }
 
-
+	    /**
+	     * - Guarda un nuevo usuario en la base de datos.
+	     * @param usuario
+	     */
 	    public void guardarUsuario(Usuario usuario) {
 	        // Inserción en la tabla empleado
 	        String sqlEmpleado = "INSERT INTO EMPLEADO (CEDULA, NOMBRE, DIRECCION, TELEFONO) VALUES (?, ?, ?, ?)";
@@ -72,7 +75,7 @@ public class DatosUsuario {
 	                pstmtEmpleado.executeUpdate();
 
 	                // Para la tabla usuario
-	                pstmtUsuario.setString(1, usuario.getCedula()); // Asumo que el ID de usuario es la cédula
+	                pstmtUsuario.setString(1, usuario.getCedula());
 	                pstmtUsuario.setString(2, usuario.getCedula());
 	                pstmtUsuario.setString(3, usuario.getUsuario());
 	                pstmtUsuario.setString(4, usuario.getContrasena());
@@ -82,23 +85,31 @@ public class DatosUsuario {
 	                System.out.println("Usuario guardado correctamente en la base de datos.");
 	            } catch (SQLException e) {
 	                System.out.println("Error al guardar el usuario en la base de datos: " + e.getMessage());
-	                // Aquí podrías agregar lógica para revertir la inserción en la tabla empleado si falla la inserción en la tabla usuario
+	                
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	    }
 
+	    /**
+	     * - Elimina un usuario de la base de datos.
+	     * @param cedula
+	     */
 public void eliminarUsuario(String cedula) {
     try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
         try (PreparedStatement stUsuario = conn.prepareStatement("DELETE FROM USUARIO WHERE cedula = ?");
              PreparedStatement stEmpleado = conn.prepareStatement("DELETE FROM EMPLEADO WHERE cedula = ?")) {
 
-            // Eliminar de la tabla usuario
+            /**
+             * - Eliminar de la tabla usuario
+             */
             stUsuario.setString(1, cedula);
             stUsuario.executeUpdate();
 
-            // Eliminar de la tabla empleado
+            /**
+             * - Eliminar de la tabla empleado
+             */
             stEmpleado.setString(1, cedula);
             stEmpleado.executeUpdate();
 
@@ -111,6 +122,10 @@ public void eliminarUsuario(String cedula) {
     }
 }
 
+/**
+ * - Actualiza los datos de un usuario de la base de datos.
+ * @param usuario
+ */
 public void actualizarUsuario(Usuario usuario) {
     // Actualización en la tabla empleado
     String sqlEmpleado = "UPDATE EMPLEADO SET nombre = ?, direccion = ?, telefono = ? WHERE cedula = ?";
@@ -144,6 +159,11 @@ public void actualizarUsuario(Usuario usuario) {
     }
 }
 
+/**
+ * - Verifica si un usuario existe en la base de datos.
+ * @param cedula
+ * @return
+ */
 public boolean existeUsuario(String cedula) {
     String sql = "SELECT COUNT(*) FROM USUARIO WHERE CEDULA = ?";
     try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
