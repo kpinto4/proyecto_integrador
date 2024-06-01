@@ -15,8 +15,12 @@ public class DatosCliente {
     /*
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String USER = "proto";
+<<<<<<< HEAD
     private static final String PASSWORD = "proto";*/
 
+=======
+    private static final String PASSWORD = "proto";
+>>>>>>> af93390 (clienteActualizado)
 
     public LinkedList<Cliente> getDatos() {
         LinkedList<Cliente> data = new LinkedList<>();
@@ -101,5 +105,11 @@ public class DatosCliente {
         }
         return false;
     }
+<<<<<<< HEAD
 
 }
+=======
+
+}
+
+>>>>>>> af93390 (clienteActualizado)
