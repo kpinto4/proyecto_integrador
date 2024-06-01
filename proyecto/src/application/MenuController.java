@@ -126,8 +126,6 @@ public class MenuController {
 }
 */
 
-
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,8 +137,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
-
+/**
+ * Esta clase sirve para ver y manipular las acciones de la ventana menu.
+ * @author Kevin Santiago
+ *
+ */
 public class MenuController {
     @FXML
     private ImageView btnFacturacion;
@@ -159,23 +160,33 @@ public class MenuController {
     
     
     
-   // Método para establecer el cargo del usuario
+   /**
+    * Método para establecer el cargo del usuario.
+    * @param cargoUsuario es la variable para definir el cargo del usuario.
+    */
     public void setCargoUsuario(String cargoUsuario) {
         this.cargoUsuario = cargoUsuario;
     }
     
- // Método para inicializar el controlador
+ /**
+  	* Método para inicializar el controlador.
+  */
     @FXML
     public void initialize() {
         cargoUsuario = Sesion.getCargoUsuario(); // Obtener el cargo del usuario desde Sesion
     }
 
-    // Evento para el botón de facturación
+    /**
+     * Método para abrir la ventana de facturación.
+     * Verifica el cargo del usuario antes de abrir la ventana. Solo los usuarios con cargo "administrador" o "vendedor" tienen acceso.
+     * Si el usuario no tiene el cargo adecuado, muestra un mensaje de error.
+     * @param event El evento del mouse que desencadena la apertura de la ventana.
+     * @throws IOException
+     */
     @FXML
     public void btnFacturacion(MouseEvent event) throws IOException {
         System.out.println("abrir facturación");
 
-        // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && (cargoUsuario.equals("administrador") || cargoUsuario.equals("vendedor"))) {
             abrirVentana("Facturacion.fxml");
         } else {
@@ -189,12 +200,17 @@ public class MenuController {
         }
     }
 
-    // Evento para el botón de clientes
+    /**
+     * Método para abrir la ventana de clientes.
+     * Verifica el cargo del usuario antes de abrir la ventana. Solo los usuarios con cargo "administrador" o "vendedor" tienen acceso.
+     * Si el usuario no tiene el cargo adecuado, muestra un mensaje de error.
+     * @param event El evento del mouse que desencadena la apertura de la ventana.
+     * @throws IOException
+     */
     @FXML
     public void btnClientes(MouseEvent event) throws IOException {
         System.out.println("abrir clientes");
 
-        // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && (cargoUsuario.equals("administrador") || cargoUsuario.equals("vendedor"))) {
             abrirVentana("Cliente.fxml");
         } else {
@@ -208,12 +224,17 @@ public class MenuController {
         }
     }
 
-    // Evento para el botón de productos
+    /**
+     * Método para abrir la ventana de productos.
+     * Verifica el cargo del usuario antes de abrir la ventana. Solo los usuarios con cargo "administrador" tienen acceso.
+     * Si el usuario no tiene el cargo adecuado, muestra un mensaje de error.
+     * @param event El evento del mouse que desencadena la apertura de la ventana.
+     * @throws IOException
+     */
     @FXML
     public void btnProductos(MouseEvent event) throws IOException {
         System.out.println("abrir productos");
 
-        // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
             abrirVentana("Producto.fxml");
         } else {         	
@@ -227,12 +248,17 @@ public class MenuController {
         }
     }
 
-    // Evento para el botón de usuarios
+    /**
+     * Método para abrir la ventana de usuarios.
+     * Verifica el cargo del usuario antes de abrir la ventana. Solo los usuarios con cargo "administrador" tienen acceso.
+     * Si el usuario no tiene el cargo adecuado, muestra un mensaje de error. 
+     * @param event El evento del mouse que desencadena la apertura de la ventana.
+     * @throws IOException
+     */
     @FXML
     public void btnUsuarios(MouseEvent event) throws IOException {
         System.out.println("abrir usuarios");
 
-        // Verificar el cargo del usuario antes de abrir la ventana
         if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
             abrirVentana("Usuario.fxml");
         } else {
@@ -246,7 +272,12 @@ public class MenuController {
         }
     }
 
-    // Método para abrir una nueva ventana
+    /**
+     * Método para abrir una nueva ventana a partir de un archivo FXML.
+     * Cierra la ventana actual antes de abrir la nueva ventana.
+     * @param fxmlPath La ruta del archivo FXML que se utilizará para cargar la nueva ventana.
+     * @throws IOException
+     */
     private void abrirVentana(String fxmlPath) throws IOException {
         Stage primaryStage = (Stage) ((Node) btnFacturacion).getScene().getWindow();
         primaryStage.close();
@@ -257,7 +288,11 @@ public class MenuController {
         stage.show();
     }
 
-    // Evento para el botón de cerrar sesión
+    /**
+     * Método para cerrar la sesión actual y regresar a la ventana de inicio de sesión.
+     * @param event El evento del mouse que desencadena el cierre de sesión.
+     * @throws IOException
+     */
     @FXML
     public void btnCerrar(MouseEvent event) throws IOException {
         System.out.println("cerrar sesión");

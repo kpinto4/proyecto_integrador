@@ -2,7 +2,7 @@ package application;
 
 
 /**
- * - Importa las clases necesarias.
+ * Importa las clases necesarias.
  * @author Kevin Santiago
  */
 import java.io.IOException;
@@ -27,7 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
 /**
- * - Esta clase sirve para ver y manipular las acciones de la ventana usuario.
+ * Esta clase sirve para ver y manipular las acciones de la ventana usuario.
  * @author Kevin Santiago
  */
 public class UsuarioController implements Initializable {
@@ -73,13 +73,13 @@ public class UsuarioController implements Initializable {
     private ImageView btnCerrar;
 
     /**
-     * - Declaración y creación de una lista observable de objetos Usuario
+     * Declaración y creación de una lista observable de objetos Usuario
      */
     ObservableList<Usuario> Datos = FXCollections.observableArrayList();
     DatosUsuario data;
 
     /**
-     * - Método de inicialización del controlador
+     * Método de inicialización del controlador
      */
     public void initialize(URL arg0, ResourceBundle arg1) {
         this.data = new DatosUsuario();
@@ -102,7 +102,7 @@ public class UsuarioController implements Initializable {
     }
     
     /**
-	* - Metodo que si selecciona un usuario, actualiza los campos de texto con sus datos.
+	* Metodo que si selecciona un usuario, actualiza los campos de texto con sus datos.
 	*/
     @FXML
     public void Tablaview(MouseEvent event) {
@@ -119,7 +119,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de cédula
+     * Método para manejar el evento de edición de la columna de cédula
      * @param event
      */
     @FXML
@@ -129,7 +129,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de nombre
+     * Método para manejar el evento de edición de la columna de nombre
      * @param event
      */
     @FXML
@@ -139,7 +139,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de dirección.
+     * Método para manejar el evento de edición de la columna de dirección.
      * @param event
      */
     @FXML
@@ -149,7 +149,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de telefono.
+     * Método para manejar el evento de edición de la columna de telefono.
      * @param event
      */
     @FXML
@@ -159,7 +159,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de usuario
+     * Método para manejar el evento de edición de la columna de usuario
      * @param event
      */
    @FXML
@@ -169,7 +169,7 @@ public class UsuarioController implements Initializable {
     }
 
    /**
-    * - Método para manejar el evento de edición de la columna de contraseña.
+    * Método para manejar el evento de edición de la columna de contraseña.
     * @param event
     */
     @FXML
@@ -179,7 +179,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método para manejar el evento de edición de la columna de cargo
+     * Método para manejar el evento de edición de la columna de cargo
      * @param event
      */
     @FXML
@@ -189,7 +189,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Metodo para cargar los usuarios existentes en la base de datos.
+     * Metodo para cargar los usuarios existentes en la base de datos.
      * @param event
      */
     @FXML
@@ -199,7 +199,7 @@ public class UsuarioController implements Initializable {
     }
     
     /**
-     * - Metodo para crear un nuevo usuario en la base de datos.
+     * Metodo para crear un nuevo usuario en la base de datos.
      * @param event
      */
     @FXML
@@ -230,7 +230,7 @@ public class UsuarioController implements Initializable {
     }
     
     /**
-     * - Metodo para eliminar un usuario de la base de datos.
+     * Metodo para eliminar un usuario de la base de datos.
      * @param event
      */
     @FXML
@@ -246,7 +246,7 @@ public class UsuarioController implements Initializable {
     }
     
     /**
-     * - Metodo para actualizar los datos de los usuario en la base de datos.
+     * Metodo para actualizar los datos de los usuario en la base de datos.
      * @param event
      */
     @FXML
@@ -270,7 +270,7 @@ public class UsuarioController implements Initializable {
     }
     
     /**
-     * - Método auxiliar para limpiar los campos de texto
+     * Método auxiliar para limpiar los campos de texto
      */
     private void limpiarCamposTexto() {
         TextCedUsuario.clear();
@@ -283,7 +283,7 @@ public class UsuarioController implements Initializable {
     }
 
     /**
-     * - Método que permite cerrar la ventana usuario y retornar a la ventana Menu
+     * Método que permite cerrar la ventana usuario y retornar a la ventana Menu
      * @param event
      * @throws IOException
      */
