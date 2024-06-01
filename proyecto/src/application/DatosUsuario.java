@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * - Importaciones necesarias para el desarrollo.
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,11 +10,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
+/**
+ * - La clase DatosUsuario sirve para manejar los procedimientos correspondientes en la base de datos.
+ * @author Kevin Santiago
+ *
+ */
 public class DatosUsuario {
 	 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	    private static final String USER = "BASE";
 	    private static final String PASSWORD = "BASE";
 	    
+	    /**
+	     * - Obtiene los datos de todos los usuarios desde la base de datos.
+	     * @return LinkedList<Usuario> lista de usuarios.
+	     */
 	    public LinkedList<Usuario> getDatos() {
 	        LinkedList<Usuario> data = new LinkedList<>();
 	        String query = "SELECT e.cedula, e.nombre, e.direccion, e.telefono, " +

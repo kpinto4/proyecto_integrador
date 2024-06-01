@@ -1,5 +1,10 @@
 package application;
 
+/**
+ * - La clase usuario recibe los datos correspondientes a usuarios y empleados.
+ * @author Kevin Santiago
+ *
+ */
 public class Usuario {
     private String Cedula;
     private String Nombre;
@@ -9,7 +14,16 @@ public class Usuario {
     private String Contrasena;
     private String Cargo;
 
-    // Constructor adaptado para los datos combinados de empleado y usuario
+    /**
+     * - Constructor adaptado para inicializar los objetos combinados de empleado y usuario.
+     * @param Cedula
+     * @param Nombre
+     * @param Direccion
+     * @param Telefono
+     * @param Usuario
+     * @param Contrasena
+     * @param Cargo
+     */
     public Usuario(String Cedula, String Nombre, String Direccion, String Telefono,String Usuario, String Contrasena, String Cargo) {
         this.Cedula = Cedula;
         this.Nombre = Nombre;
@@ -20,7 +34,6 @@ public class Usuario {
         this.Cargo = Cargo;
     }
 
-    
 
 	// Getters y setters
     public String getCedula() {
