@@ -4,16 +4,16 @@ public class Producto {
     // Propiedades del producto
     private String referencia;
     private String descripcion;
-    private String categoria;
+    private String categoria_id;
     private String stock;
     private String valor;
     
 
     // Constructor para inicializar un objeto Producto con sus propiedades
-    public Producto(String referencia, String descripcion, String categoria,String stock, String valor) {
+    public Producto(String referencia, String descripcion, String categoria_id,String stock, String valor) {
         this.referencia = referencia;
         this.descripcion = descripcion;
-        this.categoria = categoria;
+        this.categoria_id = categoria_id;
         this.stock = stock;
         this.valor = valor;
     }
@@ -37,12 +37,12 @@ public class Producto {
     }
 
     // Métodos getter y setter para categoria
-    public String getCategoria() {
-        return categoria;
+    public String getCategoria_id() {
+        return categoria_id;
     }
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setCategoria_id(String categoria_id) {
+        this.categoria_id = categoria_id;
     }
 
     // Métodos getter y setter para stock
