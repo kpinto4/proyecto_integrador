@@ -32,7 +32,7 @@ public class ProductoController implements Initializable{
 	@FXML
 	private TableColumn<Producto, String> DescripcionColumn;
 	@FXML
-	private TableColumn<Producto, String> CategoriaColumn;
+	private TableColumn<Producto, String> Categoria_idColumn;
 	@FXML
 	private TableColumn<Producto, String> StockColumn;
 	@FXML
@@ -50,7 +50,7 @@ public class ProductoController implements Initializable{
 	@FXML
 	private TextField TextDescripcion;
 	@FXML
-	private TextField TextCategoria;
+	private TextField TextCategoria_id;
 	@FXML
 	private TextField TextStock;
 	@FXML
@@ -68,14 +68,14 @@ public class ProductoController implements Initializable{
         this.data= new DatosProducto();
         this.ReferenciaColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Referencia"));
         this.DescripcionColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Descripcion"));
-        this.CategoriaColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Categoria"));
+        this.Categoria_idColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Categoria_id"));
         this.StockColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Stock"));
         this.ValorColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Valor"));
         
         Tablaview.setItems(this.Datos);
         this.ReferenciaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.DescripcionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        this.CategoriaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        this.Categoria_idColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.StockColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.ValorColumn.setCellFactory(TextFieldTableCell.forTableColumn());
                        
@@ -87,7 +87,7 @@ public class ProductoController implements Initializable{
         if (seleccion != null) {
             this.TextReferencia.setText(seleccion.getReferencia());
             this.TextDescripcion.setText(seleccion.getDescripcion());
-            this.TextCategoria.setText(seleccion.getCategoria());
+            this.TextCategoria_id.setText(seleccion.getCategoria_id());
             this.TextStock.setText(seleccion.getStock());
             this.TextValor.setText(seleccion.getValor());
             
@@ -109,9 +109,9 @@ public class ProductoController implements Initializable{
     }
 	// Event Listener on TableColumn[#CategoriaColumn].onEditCommit
 	@FXML
-	public void OnCategoriaColumn(TableColumn.CellEditEvent<Producto, String> event) {
+	public void OnCategoria_idColumn(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
-        current.setCategoria(event.getNewValue());
+        current.setCategoria_id(event.getNewValue());
     }
 	// Event Listener on TableColumn[#StockColumn].onEditCommit
 	@FXML
@@ -134,17 +134,23 @@ public class ProductoController implements Initializable{
 	// Event Listener on Button[#crearBtn].onMouseClicked
 	@FXML
 	public void crearBtn(MouseEvent event) {
-		Producto nuevoProducto = new Producto(
-				TextReferencia.getText(),
-				TextDescripcion.getText(),
-				TextCategoria.getText(),
-				TextStock.getText(),
-				TextValor.getText()
+	    String referencia = TextReferencia.getText();
+	    if (data.existeProducto(referencia)) {
+	        System.out.println("El producto con la referencia " + referencia + " ya existe en la base de datos.");
+	        // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+	    } else {
+	        Producto nuevoProducto = new Producto(
+	            referencia,
+	            TextDescripcion.getText(),
+	            TextCategoria_id.getText(),
+	            TextStock.getText(),
+	            TextValor.getText()
 	        );
 	        data.guardarProducto(nuevoProducto);
 	        Datos.add(nuevoProducto);
 	        limpiarCamposTexto();
 	    }
+	}
 	// Event Listener on Button[#eliminarBtn].onMouseClicked
 	@FXML
 	public void eliminarBtn(MouseEvent event) {
@@ -164,7 +170,7 @@ public class ProductoController implements Initializable{
         if (seleccion != null) {
             seleccion.setReferencia(TextReferencia.getText());
             seleccion.setDescripcion(TextDescripcion.getText());
-            seleccion.setCategoria(TextCategoria.getText());
+            seleccion.setCategoria_id(TextCategoria_id.getText());
             seleccion.setStock(TextStock.getText());
             seleccion.setValor(TextValor.getText());
 
@@ -178,7 +184,7 @@ public class ProductoController implements Initializable{
 	private void limpiarCamposTexto() {
 		TextReferencia.clear();
 		TextDescripcion.clear();
-		TextCategoria.clear();
+		TextCategoria_id.clear();
 		TextStock.clear();
 		TextValor.clear();
        }

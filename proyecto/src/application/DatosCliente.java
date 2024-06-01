@@ -8,9 +8,15 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class DatosCliente {
+<<<<<<< HEAD
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String USER = "proto";
     private static final String PASSWORD = "proto";
+=======
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String USER = "INNOVATECH";
+    private static final String PASSWORD = "INNOVATECH";
+>>>>>>> abac401f2027ab4ac17eb2f302a989c8d108a009
 
     public LinkedList<Cliente> getDatos() {
         LinkedList<Cliente> data = new LinkedList<>();
@@ -98,3 +104,8 @@ public class DatosCliente {
 
 }
 
+<<<<<<< HEAD
+=======
+}
+
+>>>>>>> abac401f2027ab4ac17eb2f302a989c8d108a009

@@ -246,25 +246,6 @@ public class MenuController {
         }
     }
 
-    // Evento para el botón de informes
-    @FXML
-    public void btnInformes(MouseEvent event) throws IOException {
-        System.out.println("abrir informes");
-
-        // Verificar el cargo del usuario antes de abrir la ventana
-        if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
-            abrirVentana("Informe.fxml");
-        } else {
-            System.out.println("Acceso denegado. Permiso de administrador requerido.");
-            
-            Alert error = new Alert(Alert.AlertType.ERROR);
-            error.setHeaderText("No tienes acceso esta funcion ");
-            error.setContentText("Permiso de administrador requerido.");
-            error.setTitle("Acceso denegado");
-            error.show();
-        }
-    }
-
     // Método para abrir una nueva ventana
     private void abrirVentana(String fxmlPath) throws IOException {
         Stage primaryStage = (Stage) ((Node) btnFacturacion).getScene().getWindow();
