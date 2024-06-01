@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class DatosCliente {
 
-<<<<<<< HEAD
+
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
     private static final String USER = "proto";
     private static final String PASSWORD = "proto";
@@ -17,15 +17,8 @@ public class DatosCliente {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "INNOVATECH";
     private static final String PASSWORD = "INNOVATECH";*/
-=======
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USER = "BASE";
-    private static final String PASSWORD = "BASE";
-    /*
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USER = "proto";
-    private static final String PASSWORD = "proto";*/
->>>>>>> origin/KevinS
+
+
 
 
     public LinkedList<Cliente> getDatos() {
@@ -113,8 +106,7 @@ public class DatosCliente {
     }
 
 }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/KevinS
+
+
