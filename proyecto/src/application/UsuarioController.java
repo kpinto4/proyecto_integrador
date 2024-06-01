@@ -1,13 +1,16 @@
 package application;
 
+
+/**
+ * Importa las clases necesarias.
+ * @author Kevin Santiago
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +26,10 @@ import javafx.stage.Stage;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
+/**
+ * Esta clase sirve para ver y manipular las acciones de la ventana usuario.
+ * @author Kevin Santiago
+ */
 public class UsuarioController implements Initializable {
     @FXML
     private TableView<Usuario> Tablaview;
@@ -65,9 +72,15 @@ public class UsuarioController implements Initializable {
     @FXML
     private ImageView btnCerrar;
 
+    /**
+     * Declaración y creación de una lista observable de objetos Usuario
+     */
     ObservableList<Usuario> Datos = FXCollections.observableArrayList();
     DatosUsuario data;
 
+    /**
+     * Método de inicialización del controlador
+     */
     public void initialize(URL arg0, ResourceBundle arg1) {
         this.data = new DatosUsuario();
         this.CedUsuarioColumn.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Cedula"));
@@ -87,7 +100,10 @@ public class UsuarioController implements Initializable {
         this.ContrasenaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.CargoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
-
+    
+    /**
+	* Metodo que si selecciona un usuario, actualiza los campos de texto con sus datos.
+	*/
     @FXML
     public void Tablaview(MouseEvent event) {
         Usuario seleccion = this.Tablaview.getSelectionModel().getSelectedItem();
@@ -102,54 +118,90 @@ public class UsuarioController implements Initializable {
         }
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de cédula
+     * @param event
+     */
     @FXML
     public void OnCedUsuarioColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setCedula(event.getNewValue());
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de nombre
+     * @param event
+     */
     @FXML
     public void OnNombreColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setNombre(event.getNewValue());
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de dirección.
+     * @param event
+     */
     @FXML
     public void OnDireccionColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setDireccion(event.getNewValue());
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de telefono.
+     * @param event
+     */
     @FXML
     public void OnTelefonoColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setTelefono(event.getNewValue());
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de usuario
+     * @param event
+     */
    @FXML
     public void OnUsuarioColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setUsuario(event.getNewValue());
     }
 
+   /**
+    * Método para manejar el evento de edición de la columna de contraseña.
+    * @param event
+    */
     @FXML
     public void OnContrasenaColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setContrasena(event.getNewValue());
     }
 
+    /**
+     * Método para manejar el evento de edición de la columna de cargo
+     * @param event
+     */
     @FXML
     public void OnCargoColumn(TableColumn.CellEditEvent<Usuario, String> event) {
         Usuario current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setCargo(event.getNewValue());
     }
 
+    /**
+     * Metodo para cargar los usuarios existentes en la base de datos.
+     * @param event
+     */
     @FXML
     public void cargarBtn(MouseEvent event) {
         LinkedList<Usuario> data1 = data.getDatos();
         Datos.setAll(data1);
     }
-
+    
+    /**
+     * Metodo para crear un nuevo usuario en la base de datos.
+     * @param event
+     */
     @FXML
     public void crearBtn(MouseEvent event) {
         String cedulaUsuario = TextCedUsuario.getText();
@@ -160,7 +212,7 @@ public class UsuarioController implements Initializable {
             error.setContentText("El usuario con la cédula " + cedulaUsuario + " ya existe en la base de datos.");
             error.setTitle("Error al crear el usuario");
             error.show();
-            // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+            
         } else {
             Usuario nuevoUsuario = new Usuario(
                 cedulaUsuario,
@@ -176,6 +228,11 @@ public class UsuarioController implements Initializable {
             limpiarCamposTexto();
         }
     }
+    
+    /**
+     * Metodo para eliminar un usuario de la base de datos.
+     * @param event
+     */
     @FXML
     public void eliminarBtn(MouseEvent event) {
         Usuario seleccion = Tablaview.getSelectionModel().getSelectedItem();
@@ -187,7 +244,11 @@ public class UsuarioController implements Initializable {
             System.out.println("Error: No se ha seleccionado ningún usuario para eliminar.");
         }
     }
-
+    
+    /**
+     * Metodo para actualizar los datos de los usuario en la base de datos.
+     * @param event
+     */
     @FXML
     public void actualizarBtn(MouseEvent event) {
         Usuario seleccion = Tablaview.getSelectionModel().getSelectedItem();
@@ -207,7 +268,10 @@ public class UsuarioController implements Initializable {
             System.out.println("Error: No se ha seleccionado ningún usuario para actualizar.");
         }
     }
-
+    
+    /**
+     * Método auxiliar para limpiar los campos de texto
+     */
     private void limpiarCamposTexto() {
         TextCedUsuario.clear();
         TextNombre.clear();
@@ -218,6 +282,11 @@ public class UsuarioController implements Initializable {
         TextCargo.clear();
     }
 
+    /**
+     * Método que permite cerrar la ventana usuario y retornar a la ventana Menu
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void btnCerrar(MouseEvent event) throws IOException {
         System.out.println("cerrar sesion");
@@ -228,6 +297,7 @@ public class UsuarioController implements Initializable {
         currenStage.show();
     }
 }
+
 
 /*
 package application;

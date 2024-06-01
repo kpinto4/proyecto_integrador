@@ -7,13 +7,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase ProductoFac interactua con la tabla de productos en la base de datos.
+ * @author Kevin Santiago
+ *
+ */
 public class ProductoFac {
     private Connection conexion;
 
+    /**
+     * Constructor de la clase ProductoFac.
+     * Inicializa la conexión a la base de datos. 
+     * @param conexion La conexión a la base de datos.
+     */
     public ProductoFac(Connection conexion) {
         this.conexion = conexion;
     }
 
+    /**
+     * Este metodo recupera la lista de productos de la base de datos.
+     * @return Una lista con los productos guardados en la base de datos.
+     * @throws SQLException
+     */
     public List<Producto> obtenerProductos() throws SQLException {
         List<Producto> productos = new ArrayList<>();
         String consulta = "SELECT * FROM producto";
@@ -35,11 +50,16 @@ public class ProductoFac {
         return productos;
     }
 
+    /**
+     * Este metodo busca un producto de la base de datos según su referencia.
+     * @param referencia La referencia del producto que se desea buscar.
+     * @return	El producto al que le corresponde la referencia proporcionada.
+     * @throws SQLException
+     */
     public Producto buscarProductoPorReferencia(String referencia) throws SQLException {
         if (referencia == null) {
             throw new IllegalArgumentException("La referencia no puede ser nula.");
         }
-
         Producto producto = null;
         String consulta = "SELECT * FROM producto WHERE referencia = ?";
 
@@ -62,6 +82,4 @@ public class ProductoFac {
 
         return producto;
     }
-
-
 }

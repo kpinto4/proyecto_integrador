@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * Importa las clases necesarias.
+ */
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -12,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
@@ -24,6 +28,11 @@ import javafx.scene.control.TableView;
 
 import javafx.scene.control.TableColumn;
 
+/**
+ * Esta clase sirve para ver y manipular las acciones de la ventana producto.
+ * @author Kevin Santiago
+ *
+ */
 public class ProductoController implements Initializable{
 	@FXML
 	private TableView<Producto> Tablaview;
@@ -59,11 +68,15 @@ public class ProductoController implements Initializable{
 	private ImageView btnCerrar;
 		
 
-	
+	/**
+	 * Declaración y creación de una lista observable de objetos Producto.
+	 */
 	ObservableList<Producto> Datos = FXCollections.observableArrayList();
-    
     DatosProducto data;
-	// Event Listener on TableView[#Tablaview].onMouseClicked
+    
+	/**
+	 * Método de inicialización del controlador.
+	 */
     public void initialize(URL arg0, ResourceBundle arg1) {
         this.data= new DatosProducto();
         this.ReferenciaColumn.setCellValueFactory(new PropertyValueFactory<Producto, String>("Referencia"));
@@ -81,6 +94,11 @@ public class ProductoController implements Initializable{
                        
     }
     
+    /**
+     * Método para manejar el evento de selección de un elemento en la tabla de productos.
+     * Si se selecciona un producto en la tabla, actualiza los campos de texto con los datos del producto seleccionado. 
+     * @param event El evento de ratón que desencadena la selección de un elemento en la tabla.
+     */
     @FXML
     public void Tablaview(MouseEvent event) {
         Producto seleccion = this.Tablaview.getSelectionModel().getSelectedItem();
@@ -90,54 +108,82 @@ public class ProductoController implements Initializable{
             this.TextCategoria_id.setText(seleccion.getCategoria_id());
             this.TextStock.setText(seleccion.getStock());
             this.TextValor.setText(seleccion.getValor());
-            
-           
-
         }
     }
-	// Event Listener on TableColumn[#ReferenciaColumn].onEditCommit
+	/**
+	  * Método para manejar el evento de edición de la columna "Referencia" en la tabla de productos.
+	  * Actualiza la referencia del producto seleccionado con el nuevo valor introducido.
+	 * @param event El evento de edición que contiene el nuevo valor introducido.
+	 */
 	@FXML
 	public void OnReferencia(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setReferencia(event.getNewValue());
     }
-	// Event Listener on TableColumn[#DescripcionColumn].onEditCommit
+	/**
+	  * Método para manejar el evento de edición de la columna "Descripcion" en la tabla de productos.
+	  * Actualiza la descripcion del producto seleccionado con la nueva información introducida.
+	 * @param event El evento de edición que contiene el nuevo dato introducido.
+	 */
 	@FXML
 	public void OnDescripcionColumn(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setDescripcion(event.getNewValue());
     }
-	// Event Listener on TableColumn[#CategoriaColumn].onEditCommit
+	/**
+	  * Método para manejar el evento de edición de la columna "Categoria" en la tabla de productos.
+	  * Actualiza la categoria del producto seleccionado con el nuevo valor introducido.
+	 * @param event El evento de edición que contiene el nuevo valor introducido.
+	 */
 	@FXML
 	public void OnCategoria_idColumn(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setCategoria_id(event.getNewValue());
     }
-	// Event Listener on TableColumn[#StockColumn].onEditCommit
+	/**
+	  * Método para manejar el evento de edición de la columna "Stock" en la tabla de productos.
+	  * Actualiza la stock del producto seleccionado con el nuevo valor introducido.
+	 * @param event El evento de edición que contiene el nuevo valor introducido.
+	 */
 	@FXML
 	public void OnStockColumn(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setStock(event.getNewValue());
     }
-	// Event Listener on TableColumn[#ValorColumn].onEditCommit
+	/**
+	  * Método para manejar el evento de edición de la columna "Valor" en la tabla de productos.
+	  * Actualiza la valor del producto seleccionado con el nuevo valor introducido.
+	 * @param event El evento de edición que contiene el nuevo valor introducido.
+	 */
 	@FXML
 	public void OnValorColumn(TableColumn.CellEditEvent<Producto, String> event) {
         Producto current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setValor(event.getNewValue());
     }
-	// Event Listener on Button[#cargarBtn].onMouseClicked
+	/**
+	 * Método para cargar los datos de los productos desde la base de datos y mostrarlos en la tabla.
+	 * Obtiene los datos de los productos utilizando el objeto de la clase DatosProducto y los establece en la lista observable "Datos". 
+	 * @param event El evento del mouse que desencadena la carga de datos. Puede ser nulo si se llama al método desde otro lugar.
+	 */
 	@FXML
 	public void cargarBtn(MouseEvent event) {
 		LinkedList<Producto> data1 = data.getDatos();
         Datos.setAll(data1);
     }
-	// Event Listener on Button[#crearBtn].onMouseClicked
+	/**
+	 * Método para crear un nuevo producto en la base de datos y agregarlo a la lista de productos.
+	 * @param event El evento del mouse que desencadena la creación del producto. Puede ser nulo si se llama al método desde otro lugar.
+	 */
 	@FXML
 	public void crearBtn(MouseEvent event) {
 	    String referencia = TextReferencia.getText();
 	    if (data.existeProducto(referencia)) {
 	        System.out.println("El producto con la referencia " + referencia + " ya existe en la base de datos.");
-	        // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
+	        Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("corrija los datos del producto e intente de nuevo");
+            error.setContentText("El producto con la referencia " + referencia + " ya existe en la base de datos.");
+            error.setTitle("Error al crear el producto");
+            error.show();
 	    } else {
 	        Producto nuevoProducto = new Producto(
 	            referencia,
@@ -151,7 +197,10 @@ public class ProductoController implements Initializable{
 	        limpiarCamposTexto();
 	    }
 	}
-	// Event Listener on Button[#eliminarBtn].onMouseClicked
+	/**
+	 * Método para eliminar un producto seleccionado de la base de datos y de la lista de productos mostrada en la tabla.
+	 * @param event El evento del mouse que desencadena la eliminación del producto. Puede ser nulo si se llama al método desde otro lugar.
+	 */
 	@FXML
 	public void eliminarBtn(MouseEvent event) {
 		Producto seleccion = Tablaview.getSelectionModel().getSelectedItem();
@@ -163,7 +212,10 @@ public class ProductoController implements Initializable{
             System.out.println("Error: No se ha seleccionado ningún cliente para eliminar.");
         }
     }
-	// Event Listener on Button[#actualizarBtn].onMouseClicked
+	/**
+	 * Método para actualizar un producto seleccionado de la base de datos y de la lista de productos mostrada en la tabla.
+	 * @param event El evento del mouse que desencadena la actualización del producto. Puede ser nulo si se llama al método desde otro lugar.
+	 */
 	@FXML
 	public void actualizarBtn(MouseEvent event) {
 		Producto seleccion = Tablaview.getSelectionModel().getSelectedItem();
@@ -181,6 +233,10 @@ public class ProductoController implements Initializable{
             System.out.println("Error: No se ha seleccionado ningún cliente para actualizar.");
         }
     }
+	
+	/**
+	 * Método privado para limpiar los campos de texto en la interfaz gráfica.
+	 */
 	private void limpiarCamposTexto() {
 		TextReferencia.clear();
 		TextDescripcion.clear();
@@ -189,16 +245,13 @@ public class ProductoController implements Initializable{
 		TextValor.clear();
        }
 	
-	
-	
-
-	// Event Listener on Button[#btnCerrar].onMouseClicked
-	@FXML
+	/**
+	 * Método para manejar el evento de cierre de sesión.
+	 * @param event El evento de clic del mouse.
+	 * @throws IOException
+	 */
 	public void btnCerrar(MouseEvent event) throws IOException {
-		// TODO Autogenerated
-		
-		System.out.println("cerrar secion");
-        
+		System.out.println("cerrar secion"); 
         Stage currenStage = (Stage) btnCerrar.getScene().getWindow();
 		//currenStage.close();
 		//abrir ventana
@@ -220,8 +273,7 @@ public class ProductoController implements Initializable{
         currentStage.setScene(new Scene(loader.load()));
         currentStage.show();*/
 		
-		
-        
+		  
 
 	}
 

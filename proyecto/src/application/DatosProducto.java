@@ -1,5 +1,8 @@
 package application;
 
+/**
+ * Importaciones necesarias para el desarrollo.
+ */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,16 +13,25 @@ import java.util.List;
 
 import javafx.scene.control.Alert;
 
+/**
+ * - La clase DatosProducto sirve para manejar los procedimientos correspondientes en la base de datos.
+ * @author Kevin Santiago
+ *
+ */
 public class DatosProducto {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "proto";
     private static final String PASSWORD = "proto";
-
+/*
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "INNOVATECH";
     private static final String PASSWORD = "INNOVATECH";
+*/
 
-
+    /**
+     * - Obtiene todos los datos de productos desde la base de datos.
+     * @return Una lista de productos existentes en la base de datos.
+     */
     public LinkedList<Producto> getDatos() {
         LinkedList<Producto> data = new LinkedList<>();
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -42,6 +54,10 @@ public class DatosProducto {
         return data;
     }
 
+    /**
+     * - Guarda un nuevo producto en la base de datos.
+     * @param producto el producto a guardar.
+     */
     public void guardarProducto(Producto producto) {
         String sql = "INSERT INTO PRODUCTO (referencia, descripcion, categoria_id, stock, valor) VALUES (?, ?, ?, ?, ?)";
 
@@ -67,6 +83,10 @@ public class DatosProducto {
     
     }
 
+    /**
+     * - Elimina un producto de la base de datos por su referencia.
+     * @param referencia es la referencia del producto a eliminar.
+     */
     public void eliminarProducto(String referencia) {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement st = conn.prepareStatement("DELETE FROM PRODUCTO WHERE referencia = ?")) {
@@ -78,6 +98,10 @@ public class DatosProducto {
         }
     }
 
+    /**
+     * - Actualiza un producto en la base de datos.
+     * @param producto es el producto actualizado.
+     */
     public void actualizarProducto(Producto producto) {
         String sql = "UPDATE PRODUCTO SET descripcion = ?, categoria_id = ?, stock = ?, valor = ? WHERE referencia = ?";
 
@@ -96,6 +120,12 @@ public class DatosProducto {
             System.out.println("Error al actualizar el producto en la base de datos: " + e.getMessage());
         }
     }
+    
+    /**
+     * - Verifica si un producto existe en la base de datos por su referencia.
+     * @param referencia es la referencia del producto a verificar.
+     * @return true si el producto existe, false de lo contrario.
+     */
     public boolean existeProducto(String referencia) {
         String sql = "SELECT COUNT(*) FROM PRODUCTO WHERE REFERENCIA = ?";
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
