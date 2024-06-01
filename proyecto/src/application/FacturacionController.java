@@ -455,10 +455,10 @@ public class FacturacionController implements Initializable {
         }
     }
 */
-    private int obtenerNuevoDetalleId() {
+   /* private int obtenerNuevoDetalleId() {
         // Implementar la lógica para obtener un nuevo ID de detalle
         return 0; // Este es solo un ejemplo
-    }
+    }*/
 
     
     @FXML
