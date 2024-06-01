@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 
 
 public class DatosFactura {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USUARIO = "proto";
     private static final String CONTRASEÑA = "proto";
     private static Connection conexion;
