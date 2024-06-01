@@ -284,7 +284,7 @@ public class FacturacionController implements Initializable {
 		}
 
     @FXML
-    public void btnBuscar() {
+    public void buscarFactura(MouseEvent event) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {
 
@@ -363,47 +363,69 @@ public class FacturacionController implements Initializable {
 
 
     @FXML
-    public void generarFactura(MouseEvent event) {
-        System.out.println("Generar y guardar factura");
+    public void generarFactura() {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            connection.setAutoCommit(false);
 
-        // Obtener el último número de factura desde la base de datos y generar un nuevo número único
-        int ultimoNumeroFactura = obtenerUltimoNumeroFacturaDesdeBD();
-        int numeroFactura = ultimoNumeroFactura + 1;
+            int facturaId = numeroFactura;
+            Date fecha = new Date(System.currentTimeMillis());
+            String cedulaCliente = cedulaClienteText.getText();
+            int metodoPagoId = metodoPagoSeleccionado;
 
-        // Obtener otros datos de la factura
-        Date fecha = new Date(System.currentTimeMillis()); // Obtener la fecha actual
-        String cedulaCliente = cedulaClienteText.getText();
-        int metodoPagoId = obtenerMetodoPagoSeleccionado();
-        double totalPago = Double.parseDouble(totalPagoText.getText());
+            // Validación de los datos antes de la inserción
+            if (cedulaCliente == null || cedulaCliente.isEmpty()) {
+                throw new SQLException("La cédula del cliente no puede estar vacía.");
+            }
+            if (metodoPagoId == 0) {
+                throw new SQLException("Debe seleccionar un método de pago.");
+            }
 
-        // Obtener productos de la tabla
-        ObservableList<Producto> productos = Tablaview.getItems();
-        List<DetalleFactura> detalles = new ArrayList<>();
+            // Insertar factura
+            String sqlFactura = "INSERT INTO factura (factura_id, fecha, cedula_cliente, metodo_pago_id) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement statementFactura = connection.prepareStatement(sqlFactura)) {
+                statementFactura.setInt(1, facturaId);
+                statementFactura.setDate(2, fecha);
+                statementFactura.setString(3, cedulaCliente);
+                statementFactura.setInt(4, metodoPagoId);
+                statementFactura.executeUpdate();
+            }
 
-        for (Producto producto : productos) {
-            DetalleFactura detalle = new DetalleFactura(
-                    obtenerNuevoDetalleId(), // Implementar lógica para obtener nuevo ID de detalle
-                    numeroFactura,
-                    Integer.parseInt(producto.getReferencia()),
-                    producto.getDescripcion(),
-                    Integer.parseInt(producto.getStock()),
-                    Double.parseDouble(producto.getValor()) * Integer.parseInt(producto.getStock())
-            );
-            detalles.add(detalle);
+            // Insertar detalles de la factura
+            ObservableList<Producto> productos = Tablaview.getItems();
+            for (Producto producto : productos) {
+                // Validación de datos del producto
+                String referencia = producto.getReferencia();
+                String descripcion = producto.getDescripcion();
+                int cantidad = Integer.parseInt(producto.getStock());
+                double valor = Double.parseDouble(producto.getValor());
+
+                if (referencia == null || referencia.isEmpty() || descripcion == null || descripcion.isEmpty() || cantidad <= 0 || valor <= 0) {
+                    throw new SQLException("Datos del producto inválidos: " + producto);
+                }
+
+                String sqlDetalle = "INSERT INTO detalle_factura (factura_id, referencia_producto, descripcion, cantidad, valor_total) VALUES (?, ?, ?, ?, ?)";
+                try (PreparedStatement statementDetalle = connection.prepareStatement(sqlDetalle)) {
+                    statementDetalle.setInt(1, facturaId);
+                    statementDetalle.setString(2, referencia);
+                    statementDetalle.setString(3, descripcion);
+                    statementDetalle.setInt(4, cantidad);
+                    statementDetalle.setDouble(5, valor * cantidad);
+                    statementDetalle.executeUpdate();
+                }
+            }
+
+            connection.commit();
+            numeroFactura++;
+            numeroFcaturaText.setText(String.valueOf(numeroFactura));
+            Tablaview.getItems().clear();
+            totalPagoText.clear();
+            cedulaClienteText.clear();
+            nombreClienteText.clear();
+            System.out.println("Factura generada exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error al generar la factura: " + e.getMessage());
         }
-
-        // Crear la factura
-        Factura factura = new Factura(numeroFactura, fecha, cedulaCliente, metodoPagoId, detalles);
-
-        // Guardar la factura en la base de datos
-        DatosFactura datosFactura = DatosFactura.getInstance();
-        datosFactura.generarFactura(factura);
-        System.out.println("Factura generada y guardada con éxito.");
-    }
-    
-    private int obtenerMetodoPagoSeleccionado() {
-        // Devolver el método de pago seleccionado
-        return metodoPagoSeleccionado;
     }
     
     /*private void obtenerMetodosDePagoDesdeBD() {
@@ -459,19 +481,21 @@ public class FacturacionController implements Initializable {
 
  // Métodos para obtener y guardar el número de factura desde/hacia la base de datos
     private int obtenerUltimoNumeroFacturaDesdeBD() {
-        int ultimoNumeroFactura = 0;
+        int ultimoNumeroFactura = 1;
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement statement = connection.createStatement()) {
-            String sql = "SELECT MAX(factura_id) AS ultimo_numero FROM factura";
+            String sql = "SELECT MAX(factura_id) AS max_id FROM factura";
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
-                ultimoNumeroFactura = resultSet.getInt("ultimo_numero");
+                int maxId = resultSet.getInt("max_id");
+                if (maxId > 0) {
+                    ultimoNumeroFactura = maxId + 1;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar la excepción aquí según sea necesario
         }
 
         return ultimoNumeroFactura;
