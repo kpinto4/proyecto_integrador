@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 public class Factura {
-    private int id;
+    private int facturaId;
     private Date fecha;
     private String cedulaCliente;
     private int metodoPagoId;
     private List<DetalleFactura> detalles;
 
-    public Factura(int id, Date fecha, String cedulaCliente, int metodoPagoId, List<DetalleFactura> detalles) {
-        this.id = id;
+    public Factura(int facturaId, Date fecha, String cedulaCliente, int metodoPagoId, List<DetalleFactura> detalles) {
+        this.facturaId = facturaId;
         this.fecha = fecha;
         this.cedulaCliente = cedulaCliente;
         this.metodoPagoId = metodoPagoId;
@@ -19,8 +19,8 @@ public class Factura {
     
     }
 
-    public int getId() {
-        return id;
+    public int getfacturaId() {
+        return facturaId;
     }
 
     public Date getFecha() {

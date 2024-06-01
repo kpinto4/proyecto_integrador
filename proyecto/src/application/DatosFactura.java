@@ -122,16 +122,16 @@ public class DatosFactura {
 
             ResultSet facturaRs = facturaStmt.executeQuery();
             if (facturaRs.next()) {
-                int id = facturaRs.getInt("factura_id");
+                int Id = facturaRs.getInt("factura_id");
                 Date fecha = facturaRs.getDate("fecha");
                 String cedulaCliente = facturaRs.getString("cedula_cliente");
                 int metodoPagoId = facturaRs.getInt("metodo_pago_id");
                String metodoPagoNombre = facturaRs.getString("nombre");
 
                 // Obtener detalles de la factura
-                List<DetalleFactura> detalles = obtenerDetallesFactura(id);
+                List<DetalleFactura> detalles = obtenerDetallesFactura(Id);
 
-                factura = new Factura(id, fecha, cedulaCliente, metodoPagoId, detalles);
+                factura = new Factura(Id, fecha, cedulaCliente, metodoPagoId, detalles);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,7 +173,7 @@ public class DatosFactura {
              PreparedStatement statementDetalle = connection.prepareStatement(sqlDetalle)) {
 
             // Insertar la factura
-            statementFactura.setInt(1, factura.getId());
+            statementFactura.setInt(1, factura.getfacturaId());
             statementFactura.setDate(2, new java.sql.Date(factura.getFecha().getTime())); // Convertir la fecha a un java.sql.Date
             statementFactura.setString(3, factura.getCedulaCliente());
             statementFactura.setInt(4, factura.getMetodoPagoId());
