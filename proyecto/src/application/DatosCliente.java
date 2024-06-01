@@ -8,9 +8,15 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 public class DatosCliente {
+<<<<<<< HEAD
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String USER = "proto";
+    private static final String PASSWORD = "proto";
+=======
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "INNOVATECH";
     private static final String PASSWORD = "INNOVATECH";
+>>>>>>> abac401f2027ab4ac17eb2f302a989c8d108a009
 
     public LinkedList<Cliente> getDatos() {
         LinkedList<Cliente> data = new LinkedList<>();
@@ -22,7 +28,6 @@ public class DatosCliente {
                 Cliente Cliente = new Cliente(
                         result.getString("Cedula"),
                         result.getString("Nombre"),
-                        result.getString("Apellido"),
                         result.getString("Direccion"),
                         result.getString("Telefono")
                 );
@@ -35,15 +40,14 @@ public class DatosCliente {
     }
 
     public void guardarCliente(Cliente cliente) {
-        String sql = "INSERT INTO CLIENTE (Cedula, Nombre, Apellido, Direccion, Telefono) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO CLIENTE (Cedula, Nombre, Direccion, Telefono) VALUES (?,  ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, cliente.getCedula());
             pstmt.setString(2, cliente.getNombre());
-            pstmt.setString(3, cliente.getApellido());
-            pstmt.setString(4, cliente.getDireccion());
-            pstmt.setString(5, cliente.getTelefono());
+            pstmt.setString(3, cliente.getDireccion());
+            pstmt.setString(4, cliente.getTelefono());
             
 
             pstmt.executeUpdate();
@@ -66,15 +70,14 @@ public class DatosCliente {
     }
 
     public void actualizarCliente(Cliente cliente) {
-        String sql = "UPDATE CLIENTE SET nombre = ?, apellido = ?, direcion = ?, telefono = ? WHERE cedula = ?";
+        String sql = "UPDATE CLIENTE SET nombre = ?, direccion = ?, telefono = ? WHERE cedula = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, cliente.getNombre());
-            pstmt.setString(2, cliente.getApellido());
-            pstmt.setString(3, cliente.getDireccion());
-            pstmt.setString(4, cliente.getTelefono());
-            pstmt.setString(6, cliente.getCedula());
+            pstmt.setString(2, cliente.getDireccion());
+            pstmt.setString(3, cliente.getTelefono());
+            pstmt.setString(4, cliente.getCedula());
 
             pstmt.executeUpdate();
             System.out.println("cliente actualizado correctamente en la base de datos.");
@@ -83,6 +86,26 @@ public class DatosCliente {
         }
     }
 
+    public boolean existeCliente(String cedula) {
+        String sql = "SELECT COUNT(*) FROM CLIENTE WHERE Cedula = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, cedula);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
 
+<<<<<<< HEAD
+=======
+}
+
+>>>>>>> abac401f2027ab4ac17eb2f302a989c8d108a009

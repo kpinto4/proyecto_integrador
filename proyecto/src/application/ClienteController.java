@@ -32,8 +32,6 @@ public class ClienteController implements Initializable{
 	@FXML
 	private TableColumn<Cliente, String> NombreColumn;
 	@FXML
-	private TableColumn<Cliente, String> ApellidoColumn;
-	@FXML
 	private TableColumn<Cliente, String> DireccionColumn;
 	@FXML
 	private TableColumn<Cliente, String> TelefonoColumn;
@@ -67,14 +65,13 @@ public class ClienteController implements Initializable{
         this.data= new DatosCliente();
         this.CedulaColumn.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Cedula"));
         this.NombreColumn.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nombre"));
-        this.ApellidoColumn.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Apellido"));
         this.DireccionColumn.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Direccion"));
         this.TelefonoColumn.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefono"));
         
         Tablaview.setItems(this.Datos);
         this.CedulaColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.NombreColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        this.ApellidoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //this.ApellidoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.DireccionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         this.TelefonoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
                        
@@ -86,7 +83,6 @@ public class ClienteController implements Initializable{
         if (seleccion != null) {
             this.TextCedula.setText(seleccion.getCedula());
             this.TextNombre.setText(seleccion.getNombre());
-            this.TextApellido.setText(seleccion.getApellido());
             this.TextDireccion.setText(seleccion.getDireccion());
             this.TextTelefono.setText(seleccion.getTelefono());
            
@@ -106,12 +102,7 @@ public class ClienteController implements Initializable{
         Cliente current = this.Tablaview.getSelectionModel().getSelectedItem();
         current.setNombre(event.getNewValue());
     }
-	// Event Listener on TableColumn[#ApellidoColumn].onEditCommit
-	@FXML
-	public void OnApellido(TableColumn.CellEditEvent<Cliente, String> event) {
-        Cliente current = this.Tablaview.getSelectionModel().getSelectedItem();
-        current.setApellido(event.getNewValue());
-    }
+	
 	// Event Listener on TableColumn[#DireccionColumn].onEditCommit
 	@FXML
 	public void OnDireccion(TableColumn.CellEditEvent<Cliente, String> event) {
@@ -133,10 +124,14 @@ public class ClienteController implements Initializable{
 	// Event Listener on Button[#crearBtn].onMouseClicked
 	@FXML
 	public void crearBtn(MouseEvent event) {
+	    String cedula = TextCedula.getText();
+	    if (data.existeCliente(cedula)) {
+	        System.out.println("El cliente con la cédula " + cedula + " ya existe en la base de datos.");
+	        // Aquí puedes mostrar un mensaje de error al usuario
+	    } else {
 	        Cliente nuevoCliente = new Cliente(
-	            TextCedula.getText(),
+	            cedula,
 	            TextNombre.getText(),
-	            TextApellido.getText(),
 	            TextDireccion.getText(),
 	            TextTelefono.getText()
 	        );
@@ -144,6 +139,7 @@ public class ClienteController implements Initializable{
 	        Datos.add(nuevoCliente);
 	        limpiarCamposTexto();
 	    }
+	}
 	// Event Listener on Button[#eliminarBtn].onMouseClicked
 	@FXML
 	public void eliminarBtn(MouseEvent event) {
@@ -163,7 +159,6 @@ public class ClienteController implements Initializable{
         if (seleccion != null) {
             seleccion.setCedula(TextCedula.getText());
             seleccion.setNombre(TextNombre.getText());
-            seleccion.setApellido(TextApellido.getText());
             seleccion.setDireccion(TextDireccion.getText());
             seleccion.setTelefono(TextTelefono.getText());
 
@@ -178,7 +173,7 @@ public class ClienteController implements Initializable{
     private void limpiarCamposTexto() {
         TextCedula.clear();
         TextNombre.clear();
-        TextApellido.clear();
+        //TextApellido.clear();
         TextDireccion.clear();
         TextTelefono.clear();
        }

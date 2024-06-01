@@ -25,7 +25,6 @@
          <columns>
             <TableColumn fx:id="CedulaColumn" onEditCommit="#OnCedula" prefWidth="68.0" style="-fx-background-color: #8BFAFF;" text="CEDULA" />
             <TableColumn fx:id="NombreColumn" onEditCommit="#OnNombre" prefWidth="84.0" style="-fx-background-color: #8BFAFF;" text="NOMBRE" />
-            <TableColumn fx:id="ApellidoColumn" onEditCommit="#OnApellido" prefWidth="75.0" style="-fx-background-color: #8BFAFF;" text="APELLIDO" />
             <TableColumn fx:id="DireccionColumn" onEditCommit="#OnDireccion" prefWidth="75.0" style="-fx-background-color: #8BFAFF;" text="DIRECCION" />
             <TableColumn fx:id="TelefonoColumn" editable="false" onEditCommit="#OnTelefono" prefWidth="75.0" sortable="false" style="-fx-background-color: #8BFAFF;" text="TELEFONO" />
          </columns>
@@ -51,10 +50,6 @@
             <TextField fx:id="TextNombre" promptText="NOMBRE" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
-               </GridPane.margin></TextField>
-            <TextField fx:id="TextApellido" promptText="APELLIDO" GridPane.columnIndex="2">
-               <GridPane.margin>
-                  <Insets left="5.0" top="5.0" />
                </GridPane.margin></TextField>
             <TextField fx:id="TextDireccion" promptText="DIRECCION" GridPane.rowIndex="1">
                <GridPane.margin>
