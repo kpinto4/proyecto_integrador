@@ -436,7 +436,44 @@ public class FacturacionController implements Initializable {
             System.out.println("Error al generar la factura: " + e.getMessage());
         }
     }
+<<<<<<< HEAD
         
+=======
+    
+    /*private void obtenerMetodosDePagoDesdeBD() {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             Statement statement = connection.createStatement()) {
+            String sql = "SELECT METODO_ID, NOMBRE FROM metodo_pago";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // Limpiar cualquier contenido previo en el menú desplegable
+            FormaDePagoMenu.getItems().clear();
+
+            // Agregar métodos de pago al menú desplegable
+            while (resultSet.next()) {
+                int metodoPagoId = resultSet.getInt("METODO_ID");
+                String nombreMetodoPago = resultSet.getString("NOMBRE");
+
+                MenuItem menuItem = new MenuItem(nombreMetodoPago);
+                menuItem.setOnAction(event -> {
+                    metodoPagoSeleccionado = metodoPagoId; // Actualizar método de pago seleccionado
+                    FormaDePagoMenu.setText(nombreMetodoPago); // Actualizar texto del menú
+                });
+
+                FormaDePagoMenu.getItems().add(menuItem);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejo básico de excepciones, se puede mejorar según el caso
+        }
+    }
+*/
+   /* private int obtenerNuevoDetalleId() {
+        // Implementar la lógica para obtener un nuevo ID de detalle
+        return 0; // Este es solo un ejemplo
+    }*/
+
+    
+>>>>>>> origin/KevinS
     @FXML
     public void eliminarElementoFactura(MouseEvent event) {
         // Obtener el índice del elemento seleccionado en la tabla
