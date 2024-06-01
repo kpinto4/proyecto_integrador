@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
@@ -127,6 +128,13 @@ public class ClienteController implements Initializable{
 	    String cedula = TextCedula.getText();
 	    if (data.existeCliente(cedula)) {
 	        System.out.println("El cliente con la cédula " + cedula + " ya existe en la base de datos.");
+	        Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("corrija los datos del cliente e intente de nuevo");
+            error.setContentText("El cliente con la cédula " + cedula + " ya existe en la base de datos.");
+            error.setTitle("Error al crear el cliente");
+            error.show();
+            
+            
 	        // Aquí puedes mostrar un mensaje de error al usuario
 	    } else {
 	        Cliente nuevoCliente = new Cliente(
