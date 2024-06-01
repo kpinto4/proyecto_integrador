@@ -140,7 +140,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
-
+/**
+ * Se confirma login exitoso y se muestran las ventanas disponibles
+ * @author Felipe T
+ *
+ */
 public class MenuController {
     @FXML
     private ImageView btnFacturacion;
