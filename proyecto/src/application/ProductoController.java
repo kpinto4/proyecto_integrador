@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TextField;
@@ -137,6 +138,12 @@ public class ProductoController implements Initializable{
 	    String referencia = TextReferencia.getText();
 	    if (data.existeProducto(referencia)) {
 	        System.out.println("El producto con la referencia " + referencia + " ya existe en la base de datos.");
+	        Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setHeaderText("corrija los datos del producto e intente de nuevo");
+            error.setContentText("El producto con la referencia " + referencia + " ya existe en la base de datos.");
+            error.setTitle("Error al crear el producto");
+            error.show();
+	        
 	        // Puedes mostrar un mensaje de error al usuario o realizar alguna otra acción
 	    } else {
 	        Producto nuevoProducto = new Producto(

@@ -436,9 +436,7 @@ public class FacturacionController implements Initializable {
             System.out.println("Error al generar la factura: " + e.getMessage());
         }
     }
-<<<<<<< HEAD
-        
-=======
+
     
     /*private void obtenerMetodosDePagoDesdeBD() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -473,7 +471,7 @@ public class FacturacionController implements Initializable {
     }*/
 
     
->>>>>>> origin/KevinS
+
     @FXML
     public void eliminarElementoFactura(MouseEvent event) {
         // Obtener el índice del elemento seleccionado en la tabla

@@ -1,34 +1,7 @@
 package application;
 
-/*import datos.MyLogin;
-import datos.Session;
 
-public class Sesion {
-	private static LoginController username;
-	private static LoginController cargoUsuario;
-	public static LoginController getUsername() {
-		return username;
-	}
-	public static void setUsername(LoginController username) {
-		Sesion.username = username;
-	}
-	public static LoginController getCargoUser() {
-		return cargoUsuario;
-	}
-	public static void setCargoUser(LoginController cargoUser) {
-		Sesion.cargoUsuario = cargoUser;
-	}
-	
-	public static void setcargoUsuario( cargoUsuario) {
-		Sesion.cargoUsuario = cargoUsuario;
-	}
-
-}*/
-
-
-
-
-public class Sesion {
+public class Sesion {//estaes para almacenar el cargo del usuario actual para su implementacion en el menu
     private static String nombreUsuario;
     private static String cargoUsuario;
 

@@ -9,8 +9,11 @@ import java.util.LinkedList;
 
 public class DatosCliente {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+    private static final String USER = "proto";
+    private static final String PASSWORD = "proto";
+/*
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "BASE";
     private static final String PASSWORD = "BASE";
@@ -33,17 +36,9 @@ public class DatosCliente {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "INNOVATECH";
     private static final String PASSWORD = "INNOVATECH";*/
-=======
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USER = "BASE";
-    private static final String PASSWORD = "BASE";
-    /*
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USER = "proto";
-    private static final String PASSWORD = "proto";*/
->>>>>>> origin/KevinS
 
->>>>>>> 4046aa6 (factura y login)
+
+
 
     public LinkedList<Cliente> getDatos() {
         LinkedList<Cliente> data = new LinkedList<>();
@@ -128,24 +123,11 @@ public class DatosCliente {
         }
         return false;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 }
 =======
 
 }
 
->>>>>>> af93390 (clienteActualizado)
-=======
-
-}
-<<<<<<< HEAD
 
 
-<<<<<<< HEAD
->>>>>>> 4046aa6 (factura y login)
-=======
-=======
->>>>>>> origin/KevinS
->>>>>>> ed3d02f (.)
