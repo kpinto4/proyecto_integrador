@@ -1,7 +1,7 @@
 package application;
 
 /**
- * - Importaciones necesarias para el desarrollo.
+ * Importaciones necesarias para el desarrollo.
  */
 import java.math.BigDecimal;
 import java.sql.Connection;

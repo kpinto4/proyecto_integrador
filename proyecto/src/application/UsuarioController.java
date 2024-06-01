@@ -298,6 +298,7 @@ public class UsuarioController implements Initializable {
     }
 }
 
+
 /*
 package application;
 

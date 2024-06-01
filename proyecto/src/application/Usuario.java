@@ -1,7 +1,7 @@
 package application;
 
 /**
- * - La clase usuario recibe los datos correspondientes a usuarios y empleados.
+ * La clase usuario recibe los datos correspondientes a usuarios y empleados.
  * @author Kevin Santiago
  *
  */

@@ -1,7 +1,7 @@
 package application;
 
 /**
- * - Importaciones necesarias para el desarrollo.
+ * Importaciones necesarias para el desarrollo.
  */
 import java.sql.Connection;
 import java.sql.DriverManager;

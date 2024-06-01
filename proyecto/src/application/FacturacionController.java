@@ -144,7 +144,6 @@ public class FacturacionController implements Initializable {
         
         
     
-        
      /*// Crear instancias de MenuItem para representar las opciones de método de pago
         MenuItem efectivoMenuItem = new MenuItem("Efectivo");
         MenuItem tCreditoMenuItem = new MenuItem("Tarjeta de Crédito");

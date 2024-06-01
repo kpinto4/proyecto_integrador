@@ -159,7 +159,6 @@ public class MenuController {
     private String cargoUsuario; // Variable para almacenar el cargo del usuario
     
     
-    
    /**
     * Método para establecer el cargo del usuario.
     * @param cargoUsuario es la variable para definir el cargo del usuario.

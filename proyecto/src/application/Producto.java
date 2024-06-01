@@ -1,7 +1,11 @@
 package application;
 
+/**
+ * La clase Producto representa un producto en el sistema.
+ * @author Kevin Santiago
+ *
+ */
 public class Producto {
-    // Propiedades del producto
     private String referencia;
     private String descripcion;
     private String categoria_id;
@@ -9,7 +13,14 @@ public class Producto {
     private String valor;
     
 
-    // Constructor para inicializar un objeto Producto con sus propiedades
+    /**
+     * Constructor para inicializar un objeto Producto con sus propiedades
+     * @param referencia
+     * @param descripcion
+     * @param categoria_id
+     * @param stock
+     * @param valor
+     */
     public Producto(String referencia, String descripcion, String categoria_id,String stock, String valor) {
         this.referencia = referencia;
         this.descripcion = descripcion;
@@ -18,7 +29,7 @@ public class Producto {
         this.valor = valor;
     }
 
-    // Métodos getter y setter para codProducto
+    // Métodos getter y setter para referencia
     public String getReferencia() {
         return referencia;
     }

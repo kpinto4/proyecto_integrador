@@ -273,8 +273,7 @@ public class ProductoController implements Initializable{
         currentStage.setScene(new Scene(loader.load()));
         currentStage.show();*/
 		
-		
-        
+		  
 
 	}
 

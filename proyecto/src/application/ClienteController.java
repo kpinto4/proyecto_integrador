@@ -241,5 +241,4 @@ public class ClienteController implements Initializable{
 		currenStage.show();
         return;
 	}
-    
 }
