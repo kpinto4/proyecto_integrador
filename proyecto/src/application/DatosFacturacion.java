@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class DatosFacturacion {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USER = "INNOVATECH";
-    private static final String PASSWORD = "INNOVATECH";
+    private static final String USER = "proto";
+    private static final String PASSWORD = "proto";
 
     private Connection connection;
 
