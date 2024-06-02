@@ -1,4 +1,4 @@
-package application;
+ package application;
 /*
 import java.io.IOException;
 
@@ -234,7 +234,8 @@ public class MenuController {
     public void btnProductos(MouseEvent event) throws IOException {
         System.out.println("abrir productos");
 
-        if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
+        // Verificar el cargo del usuario antes de abrir la ventana
+        if (cargoUsuario != null && cargoUsuario.equals("vendedor")) {
             abrirVentana("Producto.fxml");
         } else {         	
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
@@ -258,7 +259,8 @@ public class MenuController {
     public void btnUsuarios(MouseEvent event) throws IOException {
         System.out.println("abrir usuarios");
 
-        if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
+        // Verificar el cargo del usuario antes de abrir la ventana
+        if (cargoUsuario != null && cargoUsuario.equals("vendedor")) {
             abrirVentana("Usuario.fxml");
         } else {
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
