@@ -1,4 +1,4 @@
-package application;
+ package application;
 /*
 import java.io.IOException;
 
@@ -214,7 +214,7 @@ public class MenuController {
         System.out.println("abrir productos");
 
         // Verificar el cargo del usuario antes de abrir la ventana
-        if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
+        if (cargoUsuario != null && cargoUsuario.equals("vendedor")) {
             abrirVentana("Producto.fxml");
         } else {         	
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
@@ -233,7 +233,7 @@ public class MenuController {
         System.out.println("abrir usuarios");
 
         // Verificar el cargo del usuario antes de abrir la ventana
-        if (cargoUsuario != null && cargoUsuario.equals("administrador")) {
+        if (cargoUsuario != null && cargoUsuario.equals("vendedor")) {
             abrirVentana("Usuario.fxml");
         } else {
             System.out.println("Acceso denegado. Permiso de administrador requerido.");
