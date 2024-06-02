@@ -20,8 +20,8 @@ import javafx.scene.control.Alert;
  */
 public class DatosProducto {
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-    private static final String USER = "proto";
-    private static final String PASSWORD = "proto";
+    private static final String USER = "BASE";
+    private static final String PASSWORD = "BASE";
 /*
     private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String USER = "INNOVATECH";

@@ -40,9 +40,9 @@ import javafx.scene.control.TableColumn;
  */
 public class FacturacionController implements Initializable {
 	
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static final String USER = "proto";
-    private static final String PASSWORD = "proto";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String USER = "BASE";
+    private static final String PASSWORD = "BASE";
 	
     @FXML
     private MenuButton FormaDePagoMenu;
